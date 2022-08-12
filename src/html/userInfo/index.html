@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
+<title>title</title>
+<script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/userInfo.css">
+</head>
+<body class="userInfo">
+    <div class="htmlLoading">Loading···</div>
+    <div style="display:none" class=" content ">
+        <div id="null"></div>
+        <div id="userinfo">
+        <!-- 用户信息 -->
+            <div id="up">
+            <!-- 上 -->
+                <div class="flex">
+                    <div><img id="usericon"></div>
+                    <div class="flex flex-column flex1">
+                        <div id="nick" class="flex1">nick</div>
+                        <div class="flex flex1">
+                            <div id="level">LV<span>1</span></div>&nbsp;
+                            <div id="age">age</div>&nbsp;
+                            <div id="identity">TagNick</div>
+                        </div>
+                        <div class="flex flex1"><div><span id="integral"></span>&nbsp;贡献值</div>&nbsp;<div><span id="credits"></span>&nbsp;葫芦</div></div>
+                    </div>
+                    <div style="color:red;" class="flex" id="msg"><div>IP:<span id="ipAddr">未知</span></div>&nbsp;<div id="lastTime">时间</div></div>
+                </div>
+            </div>
+            <hr>
+            <div id="down">
+            <!-- 下 -->
+                <div class="flex">
+                    <div class="flex flex-column"><div id="post">&nbsp;</div><div>帖子</div></div>
+                    <span></span>
+                    <div class="flex flex-column"><div id="following">&nbsp;</div><div>关注</div></div>
+                    <span></span>
+                    <div class="flex flex-column"><div id="follower">&nbsp;</div><div>粉丝</div></div>
+                </div>
+                <div class="flex">
+                    <div class="flex flex-column"><div id="gameComment">&nbsp;</div><div>游评</div></div>
+                    <span></span>
+                    <div class="flex flex-column"><div id="comment">&nbsp;</div><div>回复</div></div>
+                    <span></span>
+                    <div class="flex flex-column"><div id="favorite">&nbsp;</div><div>收藏</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="interval"></div>
+        <div id="medalList">
+        <!-- 勋章列表 -->
+            <div><span class="who"></span>的勋章</div>
+            <div class="flex"></div>
+        </div>
+        <div class="interval"></div>
+        <div id="photos">
+        <!-- 照片 -->
+            <div><span class="who"></span>的照片</div>
+            <div class="flex"></div>
+        </div>
+        <div class="interval"></div>
+        <div id="perInfo">
+        <!-- 个人信息 -->
+            <div>个人信息</div>
+            <div>签名：<span id="signature"></span></div>
+            <div>家乡：<span id="hometown"></span></div>
+            <div>学校：<span id="school"></span></div>
+        </div>
+        <div style="display:none;" id="beenLocations">
+            <div>去过的地方&nbsp;<span>1</span></div>
+            <div class="flex">
+            </div>
+        </div>
+        <div style="display:none;" id="tags">
+            <div>标签&nbsp;<span>1</span></div>
+            <div class="flex">
+            </div>
+        </div>
+        <div class="interval"></div>
+    </div>
+</body>
+<script src="../../assets/js/index.js"></script>
+<script src="../../assets/js/userInfo.js"></script>
+</html>

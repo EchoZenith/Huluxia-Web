@@ -1,0 +1,93 @@
+* {
+    font-size:12px
+}
+.content {
+    overflow:auto
+}
+#userInfo {
+    background:rgba(0,0,0,0.4);
+    color:rgb(200,200,200)
+}
+#userInfo #down .flex span {
+    margin:20px 0;
+    width:1px;
+    background:rgb(100,100,100)
+}
+#userInfo #down .flex .flex {
+    flex:1;
+    text-align:center;
+    padding:10px 0
+}
+#userInfo #down .flex .flex:hover {
+    background:rgba(47,47,47,0.5)
+}
+#null {
+    height:150px
+}
+#userInfo #up {
+    margin:10px 10px
+}
+#userInfo #up .flex div #usericon {
+    width:60px;
+    height:60px;
+    margin-right:10px
+}
+#userinfo #up .flex div #level {
+    padding:0 5px;
+    background:rgb(25,212,105);
+    border-radius:5px
+}
+#userinfo #up .flex div #age {
+    padding:0 5px;
+    background:rgb(29,200,240);
+    border-radius:5px
+}
+#userinfo #up .flex div #identity {
+    padding:0 5px;
+    background:rgb(255,0,0);
+    border-radius:5px
+}
+#post,#following,#follower,#gameComment,#comment,#favorite,#age,#level,#level span,#identity,#nick,#integral,#credits,#signature,#hometown,#school,#beenLocations *,#tags * {
+    color:white
+}
+#medalList {
+    padding:10px 10px;
+    background:rgba(0,0,0,0.4);
+    color:rgb(200,200,200);
+    display:none
+}
+#medalList .flex img {
+    height:40px;
+    width:40px;
+    margin-top:10px;
+    margin-right:10px
+}
+.interval {
+    height:10px
+}
+#beenLocations .flex,#photos .flex,#tags .flex {
+    flex-wrap:wrap
+}
+#photos .flex img {
+    margin:10px 10px 0 0;
+    width:calc((100% - 30px) / 4)
+}
+#photos .flex img:nth-of-type(4n+0) {
+    margin-right:0
+}
+#perInfo,#beenLocations,#photos,#tags {
+    padding:10px 10px;
+    background:rgba(0,0,0,0.4);
+    color:rgb(200,200,200)
+}
+#beenLocations .flex div,#tags .flex div {
+    padding:0 10px;
+    background:rgb(25,212,105);
+    border-radius:5px;
+    margin-top:10px;
+    margin-right:10px
+}
+#beenLocations div span,#tags div span {
+    color:rgb(100,200,100);
+    font-weight:bold
+}

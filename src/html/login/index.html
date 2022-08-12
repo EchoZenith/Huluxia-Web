@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
+<title>title</title>
+<script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/login.css">
+</head>
+<body class="login">
+    <div class="top">
+        <div class="login-box">
+            <h2>Login</h2>
+            <span></span>
+            <div class="form">
+                <input id="account" type="tel" maxlength="11" placeholder="请输入手机号" oninput="value=value.replace(/[\D]/g,'')">
+            </div>
+            <div class="form">
+                <input id="password" type="password" placeholder="请输入密码">
+            </div>
+            <div class="form">
+                <button id="loginBut" type="button">登&nbsp;&nbsp;录</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../assets/js/login.js"></script>
+</html>
