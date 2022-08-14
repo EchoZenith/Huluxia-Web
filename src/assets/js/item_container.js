@@ -30,9 +30,11 @@ $(function() {
     });
     $("#signin")
         .click(function() {
-        if ($(this).attr("signin") == "yes") {
+        if ($(this)
+            .attr("signin") == "yes") {
             alert("已经签到过了");
-        } else if ($(this).attr("signin") == "no") {
+        } else if ($(this)
+            .attr("signin") == "no") {
             _key = $.cookie("Huluxia-Web-_key");
             if (_key == null) {
                 alert("未登录");
@@ -42,10 +44,22 @@ $(function() {
                     _key: _key,
                     cat_id: $_GET["cat_id"]
                 }, function(data) {
-                    $("#signin")
-                        .attr("signin", "yes");
-                    $("#signinText")
-                        .text("已签到");
+                    if (data.code == 103 || data.msg == "未登录") {
+                        /*_key失效*/
+                        $.removeCookie("Huluxia-Web-_key", {
+                            path: '/'
+                        });
+                        $.removeCookie("Huluxia-Web-userID", {
+                            path: '/'
+                        });
+                        alert("未登录");
+                        window.location.href = "../login/?cat_id=" + $_GET["cat_id"] + "&origin=item_container/;cat_id";
+                    } else {
+                        $("#signin")
+                            .attr("signin", "yes");
+                        $("#signinText")
+                            .text("已签到");
+                    }
                 });
             }
         }
@@ -60,10 +74,10 @@ $(function() {
             notice = weightAndTopPost[i].notice;
             if (notice == 1) {
                 $(".notice-board")
-                    .append('<div post_id="' + postID + '"class="flex weightAndTop"><div class="NoticeName">公告</div><div class="flex1">' + title + '</div></div><hr>');
+                    .append('<div post_id="' + postID + '"class="flex isClickBackground weightAndTop"><div class="NoticeName">公告</div>&nbsp;<div class="flex1">' + title + '</div></div><hr>');
             } else {
                 $(".notice-board")
-                    .append('<div post_id="' + postID + '"class="flex weightAndTop"><div class="TopName">置顶</div><div class="flex1">' + title + '</div></div><hr>');
+                    .append('<div post_id="' + postID + '"class="flex isClickBackground weightAndTop"><div class="TopName">置顶</div>&nbsp;<div class="flex1">' + title + '</div></div><hr>');
             }
         }
         $(".weightAndTop")
@@ -98,9 +112,9 @@ $(function() {
                 nick = posts.user.nick;
                 postID = posts.postID;
                 if (posts.images.length == 0) {
-                    str += '<div post_id="' + postID + '" class="flex post-list-item"><div class="flex post-title flex-column"><div style="padding:10px 10px" class="flex1">' + title + '</div><div style="padding:10px 10px">' + nick + '</div></div></div><hr>';
+                    str += '<div post_id="' + postID + '" class="flex isClickBackground post-list-item"><div class="flex post-title flex-column"><div style="padding:10px 10px" class="flex1">' + title + '</div><div style="padding:10px 10px">' + nick + '</div></div></div><hr>';
                 } else {
-                    str += '<div post_id="' + postID + '" class="flex post-list-item"><div><img class="post-icon" src="' + images + '" /></div><div class="flex post-title flex-column"><div style="margin:10px 0" class="flex1">' + title + '</div><div style="margin:10px 0" height="20px">' + nick + '</div></div></div><hr>';
+                    str += '<div post_id="' + postID + '" class="flex isClickBackground post-list-item"><div><img class="post-icon" src="' + images + '" /></div><div class="flex post-title flex-column"><div style="margin:10px 0" class="flex1">' + title + '</div><div style="margin:10px 0" height="20px">' + nick + '</div></div></div><hr>';
                 }
             }
             $(".bf")

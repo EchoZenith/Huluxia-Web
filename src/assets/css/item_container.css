@@ -1,0 +1,71 @@
+.content {
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+.head {
+    height:100px;
+    width:100%;
+}
+.head .img img {
+    width:80px;
+    height:80px;
+    margin:10px 10px;
+}
+.head .info {
+    height:80px;
+    margin:10px 10px;
+}
+.head .info div span {
+    font-size:10px;
+}
+.head .info div #view, .head .info div #post {
+    color:#008800;
+}
+.post-list .post-list-item {
+    height:120px;
+    width:100%;
+}
+.post-list .post-list-item div .post-icon {
+    width:100px;
+    height:100px;
+    margin:10px 10px;
+}
+.head div .flex span img {
+    height:20px;
+    border-radius:0;
+}
+.fca{
+    padding:0 10px;
+    background:#FAFAFA;
+}
+.fca div .flex {
+    justify-content:center;
+    padding:10px 10px
+}
+.fca div .flex span {
+    text-align:center;
+}
+.fca div .flex span img {
+    height:20px;
+    border-radius:0;
+}
+.notice-board .weightAndTop {
+    padding:10px 10px;
+}
+.notice-board .weightAndTop .NoticeName {
+    padding:0 5px;
+    background:#FF3E62;
+    border-radius:2px;
+    color:white;
+}
+.notice-board .weightAndTop .TopName {
+    padding:0 5px;
+    background:#FB9644;
+    border-radius:2px;
+    color:white;
+}
+.notice-board .weightAndTop .flex1,.post-list .post-list-item .post-title div {
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}

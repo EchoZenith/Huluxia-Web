@@ -82,6 +82,9 @@ a:hover {
 a:active {
     color: #2196F3
 }
+.isClickBackground:active {
+    background:rgba(40,40,40,0.8);
+}
 /*单页样式*/
     .category .content .cate-container {
     width:100px;
@@ -111,79 +114,6 @@ a:active {
 .category .content .zone-content .flex div img {
     height:50px;
     margin:10px 10px
-}
-.item_container .content {
-    overflow-y:scroll;
-    overflow-x:hidden;
-}
-.item_container .content .head {
-    height:100px;
-    width:100%;
-}
-.item_container .content .head .img img {
-    width:80px;
-    height:80px;
-    margin:10px 10px;
-}
-.item_container .content .head .info {
-    height:80px;
-    margin:10px 10px;
-}
-.item_container .content .head .info div span {
-    font-size:10px;
-}
-.item_container .content .head .info div #view, .item_container .content .head .info div #post {
-    color:#008800;
-}
-.item_container .content .post-list .post-list-item {
-    height:120px;
-    width:100%;
-}
-.item_container .content .post-list .post-list-item div .post-icon {
-    width:100px;
-    height:100px;
-    margin:10px 10px;
-}
-.item_container .content .head div .flex span img {
-    height:20px;
-    border-radius:0;
-}
-.item_container .content .fca {
-    padding:10px 0;
-    background:#FAFAFA;
-}
-.item_container .content .fca div .flex {
-    justify-content:center;
-}
-.item_container .content .fca div .flex span {
-    text-align:center;
-}
-.item_container .content .fca div .flex span img {
-    height:20px;
-    border-radius:0;
-}
-.item_container .content .notice-board {
-    padding:10px 0;
-}
-.item_container .content .notice-board .weightAndTop {
-    margin:10px 10px;
-}
-.item_container .content .notice-board .weightAndTop .NoticeName {
-    padding:0 5px;
-    background:#FF3E62;
-    border-radius:2px;
-    color:white;
-}
-.item_container .content .notice-board .weightAndTop .TopName {
-    padding:0 5px;
-    background:#FB9644;
-    border-radius:2px;
-    color:white;
-}
-.item_container .content .notice-board .weightAndTop .flex1,.item_container .content .post-list .post-list-item .post-title div {
-    white-space: nowrap;
-    overflow:hidden;
-    text-overflow: ellipsis;
 }
 .post_content .content {
     overflow-x:hidden;

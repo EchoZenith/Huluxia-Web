@@ -5,11 +5,11 @@ img {
     border-radius:5px
 }
 .content {
-    overflow:auto
+    overflow:scroll;
 }
 #userInfo {
     background:rgba(120,120,120,0.4);
-    color:rgb(200,200,200)
+    color:rgb(200,200,200);
 }
  #up {
     padding:10px 0;
@@ -24,7 +24,7 @@ img {
     text-align:center;
     padding:10px 0
 }
-#down .flex .flex:hover {
+#down .flex .flex:active {
     background:rgba(47,47,47,0.5)
 }
 #null {
@@ -94,4 +94,23 @@ img {
 }
 #identity,#age,#level,#level span,#beenLocations .flex ,#tags .flex{
     color:white;
+}
+.ftools {
+    align-items : flex-end
+}
+.ftools div {
+    background:rgb(255,255,255);
+}
+.ftools .flex1 {
+    text-align:center;
+    padding:15px 10px 15px 10px;
+    font-size:15px;
+}
+.ftools .flex1:active {
+    background:rgba(40,40,40,0.8);
+    color:rgb(255,255,255);
+}
+.complaint ,.follow{
+    color:rgb(252,61,77);
+    font-weight:bold;
 }

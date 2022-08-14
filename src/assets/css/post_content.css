@@ -141,10 +141,10 @@ to {
     margin:10px 0 10px 10px;
     border-radius:40px;
 }
-.footer .flex .flex1 {
+.footer div .flex .flex1 {
     margin-top:10px;
 }
-.footer div .flex1 {
+.footer div div .flex1 {
     margin:10px 10px;
 }
 .ref {
@@ -162,4 +162,7 @@ to {
 }
 .down {
     margin-left:70px;
+}
+.page-turn div:active {
+    background:rgba(40,40,40,0.8);
 }

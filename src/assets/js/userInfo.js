@@ -18,7 +18,7 @@ $(function() {
                 if (data.code == 103) {
                     //key已失效
                     alert("未登录");
-                    window.location.href = "../login/?"+getAllPar;
+                    window.location.href = "../login/?" + getAllPar;
                 } else if (data.code == null) {
                     if ($.cookie("Huluxia-Web-userID") == $_GET["user_id"]) {
                         $(".who")
@@ -39,13 +39,13 @@ $(function() {
                     age = data.age; //年龄
                     gender = data.gender; //性别(1女 2男)
                     level = data.level; //等级
-                    levelColor = data.levelColor;//等级颜色
+                    levelColor = data.levelColor; //等级颜色
                     integral = data.integral; //贡献值
                     integralNick = data.integralNick; //贡献名
                     credits = data.credits; //葫芦数
                     ipAddr = data.ipAddr; //ip属地
                     identityTitle = data.identityTitle; //称号
-                    identityColor = data.identityColor;//称号颜色
+                    identityColor = data.identityColor; //称号颜色
                     medalList = data.medalList; //勋章列表
                     photos = data.photos; //照片列表
                     signature = data.signature; //个性签名
@@ -98,22 +98,30 @@ $(function() {
                     }
                     $("#ipAddr")
                         .text(ipAddr);
-                    $("#lastTime")
-                        .text(lastLoginTime);
+                    if ($_GET["user_id"] == $.cookie("Huluxia-Web-userID")) {
+                        $("#lastTime")
+                            .hide();
+                    } else {
+                        $("#lastTime")
+                            .text(lastLoginTime);
+                    }
                     if (gender == 2) {
                         $("#age")
-                        .text("♂" + age).css("background","#00CCF5");
+                            .text("♂" + age)
+                            .css("background", "#00CCF5");
                     } else {
                         $("#age")
-                        .text("♀" + age).css("background","#FF41A5");
+                            .text("♀" + age)
+                            .css("background", "#FF41A5");
                     }
-                    
+
                     if (identityTitle == "") {
                         $("#identity")
                             .hide();
                     } else {
                         $("#identity")
-                            .text(identityTitle).css("background",rgba2hex(identityColor));
+                            .text(identityTitle)
+                            .css("background", rgba2hex(identityColor));
                     }
                     $("#level span")
                         .text(level);
@@ -138,12 +146,21 @@ $(function() {
                                 'background-image': 'url("' + space.imgurl + '")',
                                 'background-size': 'cover'
                             });
-                            $("#userinfo,#tags,#beenLocations,#perInfo,#photos,#medalList").css({"background":"rgb(255,255,255)"});
-                            $(".color-white").each(function(){
-                                $(this).removeClass("color-white");
-                                $(this).addClass("color-black");
+                            $("#userinfo,#tags,#beenLocations,#perInfo,#photos,#medalList")
+                                .css({
+                                "background": "rgb(255,255,255)"
                             });
-                            $(".userInfo").css({"background":"rgb(240,240,240)"});
+                            $(".color-white")
+                                .each(function() {
+                                $(this)
+                                    .removeClass("color-white");
+                                $(this)
+                                    .addClass("color-black");
+                            });
+                            $(".userInfo")
+                                .css({
+                                "background": "rgb(240,240,240)"
+                            });
                         } else {
                             $(".userInfo")
                                 .css({
@@ -151,8 +168,12 @@ $(function() {
                                 'background-size': 'cover'
                             });
                         }
-                    } else if(space==null) {
-                        $(".userInfo").css({'background-image':'url("../../assets/img/bg_profile.png")','background-size':'cover'});
+                    } else if (space == null) {
+                        $(".userInfo")
+                            .css({
+                            'background-image': 'url("../../assets/img/bg_profile.png")',
+                            'background-size': 'cover'
+                        });
                     }
                     if (hometown != null && hometown.hometown_city != "无") {
                         $("#hometown")
@@ -186,6 +207,84 @@ $(function() {
                         .slideUp("slow");
                     $(".content")
                         .show("slow");
+                    if ($.cookie("Huluxia-Web-userID") != $_GET["user_id"]) {
+                        $(".ftools")
+                            .show();
+                        $.getJSON("http://floor.huluxia.com/friendship/check/ANDROID/2.1?jsoncallback=?", {
+                            _key: _key,
+                            user_id: $_GET["user_id"]
+                        }, function(data) {
+                            switch (data.friendship) {
+                                case 0:
+                                    //对方关注了你
+                                    $(".follow")
+                                        .text("关注")
+                                        .attr("ship", "0")
+                                        .css("color", "rgb(249,183,0)");
+                                    break;
+                                case 1:
+                                    //你关注了对方
+                                    $(".follow")
+                                        .text("已关注")
+                                        .attr("ship", "1")
+                                        .css("color", "rgb(255,255,255)");
+                                    break;
+                                case 2:
+                                    //互关
+                                    $(".follow")
+                                        .text("互相关注")
+                                        .attr("ship", "2")
+                                        .css("color", "rgb(25,212,105)");
+                                    break;
+                                case 3:
+                                    //互不关
+                                    $(".follow")
+                                        .text("关注")
+                                        .attr("ship", "3")
+                                        .css("color", "rgb(249,183,0)");
+                                    break;
+                            }
+                            $(".follow")
+                                .click(function() {
+                                switch ($(this)
+                                    .attr("ship")) {
+                                    case "0":
+                                        $.getJSON("http://floor.huluxia.com/friendship/follow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
+                                        $(".follow")
+                                        .text("互相关注")
+                                        .attr("ship", "2")
+                                        .css("color", "rgb(25,212,105)");
+                                        break;
+                                    case "1":
+                                        $.getJSON("http://floor.huluxia.com/friendship/unfollow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
+                                        $(".follow")
+                                        .text("关注")
+                                        .attr("ship", "3")
+                                        .css("color", "rgb(249,183,0)");
+                                        break;
+                                    case "2":
+                                        $.getJSON("http://floor.huluxia.com/friendship/unfollow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
+                                        $(".follow")
+                                        .text("关注")
+                                        .attr("ship", "0")
+                                        .css("color", "rgb(249,183,0)");
+                                        break;
+                                    case "3":
+                                    $.getJSON("http://floor.huluxia.com/friendship/follow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
+                                    $(".follow")
+                                        .text("已关注")
+                                        .attr("ship", "1")
+                                        .css("color", "rgb(255,255,255)");
+                                        break;
+                                }
+                            });
+                            $(".complaint").click(function(){
+                                $.getJSON("http://floor.huluxia.com/complaint/ANDROID/4.0?jsoncallback=?",{_key,_key,file_id:$_GET["user_id"]},function() {
+                                    alert("已举报");
+                                });
+                            });
+                        });
+                    }
                 } else if (data.code == 104) {
                     alert("用户不存在");
                     if ($_GET["origin"] != null || $_GET["origin"] != "") {
@@ -198,6 +297,6 @@ $(function() {
         }
     } else {
         alert("未登录");
-        window.location.href = "../login/?"+getAllPar;
+        window.location.href = "../login/?" + getAllPar;
     }
 });
