@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
+<title>title</title>
+<script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+<!-- <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script> -->
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- <link rel="stylesheet" href="../../assets/css/login.css"> -->
+<style>
+.cgourd{
+margin:10px 10px;
+}
+hr{
+margin:10px 0;
+}
+</style>
+</head>
+<body class="cgourd">
+    <div></div>
+    <div style="display:none;" id="c">
+        <b>贡献值是什么？</b>
+        <div>"贡献值“是葫芦侠社区用户鼓励大家参与社区秩序和环境维护的积分。</div>
+        <hr>
+        <b>贡献值有什么用？</b>
+        <div>"贡献值“可以兑换各种社区荣誉，比如勋章等；</div>
+        <hr>
+        <b>贡献值获取和扣除规则？</b>
+        <div>1.新主题：用户每天的前5个新主题，都可以获得10贡献值。但如果新主题被删除，会扣除12点贡献值。</div>
+        <div>2.参与审核：每审核一个主题或回复，包括通过和不通过，都可以获得1贡献值。但如果该审核通过后被删除，会扣除2贡献值。</div>
+        <hr>
+        <b>贡献称号是什么？如何显示？</b>
+        <div>“贡献称号”是葫芦侠3楼根据当前的3楼发展状态调整的一种显示方式；当葫芦丝贡献达到对应的称号，空间页面的贡献值位置将以称号方式显示，但未达到对应贡献值的葫芦丝，贡献还以数字方式显示。</div>
+        <hr>
+        <b>贡献称号与贡献背景的关系是？使用贡献背景是否扣除贡献值？是否可以永久使用？</b>
+        <div>个人“贡献称号”达到或超过“贡献背景”使用要求的称号，可以免费使用该贡献背景；通过贡献称号免费使用的贡献背景是不扣贡献值的；当贡献称号因贡献兑换勋章或删帖等扣除导致称号掉级的，仍可使用当前的贡献背景，当切换到其他背景或其他模式将不可以再使用该级别的贡献背景。</div>
+        <hr>
+        <b>贡献称号等级明细</b>
+        <table>
+        <tr><td>L1（500）</td><td>初入门槛</td></tr>
+        <tr><td>L2（1250）</td><td>籍籍无名</td></tr>
+        <tr><td>L3（2500）</td><td>鲜有人知</td></tr>
+        <tr><td>L4（5000）</td><td>一鸣惊人</td></tr>
+        <tr><td>L5（10000）</td><td>震惊百里</td></tr>
+        <tr><td>L6（20000）</td><td>众人皆知</td></tr>
+        <tr><td>L7（30000）</td><td>超凡入圣</td></tr>
+        <tr><td>L8（45000）</td><td>傲视群雄</td></tr>
+        <tr><td>L9（55000）</td><td>独步天下</td></tr>
+        <tr><td>L10（75000）</td><td>一代宗师</td></tr>
+        <tr><td>L11（150000）</td><td>翻云覆雨</td></tr>
+        <tr><td>L12（300000）</td><td>谁与争锋</td></tr>
+        <tr><td>L13（600000）</td><td>天下无双</td></tr>
+        <tr><td>L14（1200000）</td><td>独孤求败</td></tr>
+        </table>
+    </div>
+    <div style="display:none;" id="gourd">
+        <b>葫芦是什么？</b>
+        <div>“葫芦”是葫芦侠社区用于鼓励分享、鼓励优质内容的积分。</div>
+        <hr>
+        <b>葫芦有什么用？</b>
+        <div>“葫芦”可以定期兑换RMB,通过QB、话费、支付宝等形式兑现。也可以在兑换中心兑换指定礼品。</div>
+        <hr>
+        <b>葫芦怎么获得？</b>
+        <div>在葫芦侠社区分享好东西，创作高价值内容，或参与各种社区活动，都可以获得“葫芦”</div>
+        <hr>
+        <b>葫芦与贡献背景的关系是什么? 是否可以永久使用? ?</b>
+        <div>使用贡献背景因达不到使用贡献称号条件的可以使用“葫芦”购买贡献背景; 通过“葫芦”购买的贡献背景可以永久使用，不受贡献称号掉级或切换背景、模式的限制。</div>
+    </div>
+</body>
+<!-- <script src="../../assets/js/cgourd.js"></script> -->
+<script>
+$(function(){
+    if($_GET["type"]=="c"){
+        $("#c").show();
+    } else if($_GET["type"]=="g"){
+        $("#gourd").show();
+    } else {
+        if($_GET["origin"]!=null||$_GET["origin"]!="") {
+            window.location.href = "../"+$_GET["origin"]+"/?origin=cgourd";
+        } else {
+            window.location.href = "../category/?origin=cgourd";
+        }
+    }
+})
+
+</script>
+</html>

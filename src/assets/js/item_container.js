@@ -5,9 +5,50 @@ $(function() {
     if ($_GET["cat_id"] == "" || $_GET["cat_id"] == null || $_GET["fum_id"] == "" || $_GET["fum_id"] == null) {
         window.location.href = "../category/";
     }
+    $.getJSON("../../php/user/signin/check/ANDROID/2.0.php", {
+        cat_id: $_GET["cat_id"],
+        user_id: $.cookie("Huluxia-Web-userID"),
+        _key: $.cookie("Huluxia-Web-_key")
+    }, function(data) {
+        if (data.signin == 0) {
+            /*未签到*/
+            $("#signin")
+                .attr("signin", "no");
+            $("#signinText")
+                .text("签到");
+        } else if (data.signin == 1) {
+            /*已签到*/
+            $("#signin")
+                .attr("signin", "yes");
+            $("#signinText")
+                .text("已签到");
+        }
+    });
     $("#daren")
         .click(function() {
         window.location.href = "../daren/?cat_id=" + $_GET["cat_id"];
+    });
+    $("#signin")
+        .click(function() {
+        if ($(this).attr("signin") == "yes") {
+            alert("已经签到过了");
+        } else if ($(this).attr("signin") == "no") {
+            _key = $.cookie("Huluxia-Web-_key");
+            if (_key == null) {
+                alert("未登录");
+                window.location.href = "../login/?cat_id=" + $_GET["cat_id"] + "&origin=item_container/;cat_id";
+            } else {
+                $.getJSON("../../php/user/signin/ANDROID/4.0.php", {
+                    _key: _key,
+                    cat_id: $_GET["cat_id"]
+                }, function(data) {
+                    $("#signin")
+                        .attr("signin", "yes");
+                    $("#signinText")
+                        .text("已签到");
+                });
+            }
+        }
     });
     $.getJSON("../../php/post/list/ANDROID/4.1.8.php", {
         cat_id: $_GET["cat_id"]

@@ -22,3 +22,37 @@ function timestampToTime(timestamp) {
         var s = date.getSeconds();
         return Y+M+D+h+m+s;
 }
+function getOrigin() {
+    if($_GET!=null) {
+        let originObj = $_GET["origin"].split(";");
+        if(originObj.length>1) {
+            let obj = originObj[1].split(","),str = '',c;
+            for(let i=0;i<obj.length;i++){
+                if(obj[i] in $_GET){
+                    c = obj[i];
+                    str += obj[i]+"="+$_GET[c]+"&";
+                }
+            }
+            return originObj[0]+"?"+str;
+        } else {
+            return originObj[0];
+        }
+    } else {
+        return "";
+    }
+}
+var getAllPar = (function(){
+        let u = window.location.href;
+        let p=u.split('?')[1];
+        if(p!=null){
+            return p;
+        }else{
+            return "";
+        }
+})();
+
+function rgba2hex(rgba) {
+    var hex = rgba.toString(16);
+    var color = '#' + hex.slice(2);
+    return color;
+}

@@ -5,7 +5,6 @@ $(function() {
     if ($_GET["post_id"] == "" || $_GET["post_id"] == null) {
         window.location.href = "../category/";
     }
-    let voice, title, detail, images, post, updateTime, hit, commentCount, comments, postType, recommendTopics;
     $.getJSON("../../php/post/detail/ANDROID/4.1.8.php", {
         post_id: $_GET["post_id"]
     }, function(data) {
@@ -14,6 +13,16 @@ $(function() {
         window.totalPage = data.totalPage;
         window.currPageNo = data.currPageNo;
         voice = post.voice;
+        user = post.user;
+        auser_id = user.userID
+        anick = user.nick;
+        aavatar = user.avatar;
+        aidentityTitle = user.identityTitle;
+        aidentityColor = user.identityColor;
+        alevel = user.level;
+        alevelColor = user.levelColor;
+        aage = user.age;
+        agender = user.gender;
         detail = post.detail;
         title = post.title;
         images = post.images;
@@ -26,6 +35,38 @@ $(function() {
             .replace(/<\/image>/g, ">");
         $(".middle")
             .text(currPageNo + "/" + totalPage);
+        $(".author")
+            .attr("user_id", auser_id);
+        $(".author #img img")
+            .attr("src", aavatar);
+        $("#info #nick")
+            .text(anick);
+        $("#info .tag .level")
+            .css("background", rgba2hex(alevelColor));
+        $("#info .tag .level span")
+            .text(alevel);
+        if (agender == 2) {
+            $("#info .tag .age")
+                .text("♂" + aage)
+                .css("background", "#00CCF5");
+        } else if (agender == 1) {
+            $("#info .tag .age")
+                .text("♀" + aage)
+                .css("background", "#FF41A5");
+        }
+        if (aidentityTitle == "") {
+            $("#info .tag .identityTitle")
+                .hide();
+        } else {
+            $("#info .tag .identityTitle")
+                .text(aidentityTitle)
+                .css("background", rgba2hex(aidentityColor));
+        }
+        $(".author")
+            .click(function() {
+            window.location.href = "../userinfo/?user_id=" + $(this)
+                .attr("user_id") + "&post_id=" + $_GET["post_id"] + "&origin=post_content/;post_id";
+        });
         $(".body")
             .html(detail);
         $(".head")
@@ -126,35 +167,84 @@ $(function() {
             text = comments[i].text;
             createTime = timestampToTime(comments[i]["createTime"]);
             nick = comments[i].user.nick;
+            user_id = comments[i].user.userID;
+            age = comments[i].user.age;
+            level = comments[i].user.level;
+            levelColor = comments[i].user.levelColor;
+            gender = comments[i].user.gender;
+            identityColor = comments[i].user.identityColor;
+            identityTitle = comments[i].user.identityTitle;
             avatar = comments[i].user.avatar;
             seq = comments[i].seq;
             images = comments[i].images;
             refComment = comments[i].refComment;
             text = text.replace(/\[/g, "<face>[<writeface>")
                 .replace(/\]/g, "</writeface>]</face>");
-            /*判断是评论否有图片,有则增加*/
-            if (images.length == 0) {
-                if (refComment == null) {
-                    $(".footer")
-                        .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="white-space:pre-line;">' + text + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+            if (gender == 2) {
+                age = "♂" + age;
+                ageColor = "#00CCF5";
+            } else if (gender == 1) {
+                age = "♀" + age;
+                ageColor = "#FF41A5";
+            }
+            if (levelColor == 0) {
+                levelColor = '#19D469';
+            } else {
+                levelColor = rgba2hex(levelColor);
+            }
+            if (identityTitle == "") {
+                /*判断是评论否有图片,有则增加*/
+                if (images.length == 0) {
+                    if (refComment == null) {
+                        $(".footer")
+                            .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                    } else {
+                        $(".footer")
+                            .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                    }
                 } else {
-                    $(".footer")
-                        .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="width:100%;background:#F0F0F0;padding:5px 10px;border-radius:10px"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;">' + text + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                    str = '';
+                    for (let i = 0; i < images.length; i++) {
+                        str += '<img src="' + images[i] + '">';
+                    }
+                    if (refComment == null) {
+                        $(".footer")
+                            .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div><div class="flex comment-img">' + str + '</div></div><hr>');
+                    } else {
+                        $(".footer")
+                            .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div><div class="flex comment-img">' + str + '</div></div><hr>');
+                    }
                 }
             } else {
-                str = '';
-                for (let i = 0; i < images.length; i++) {
-                    str += '<img src="' + images[i] + '">';
-                }
-                if (refComment == null) {
-                    $(".footer")
-                        .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="white-space:pre-line;">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                /*判断是评论否有图片,有则增加*/
+                if (images.length == 0) {
+                    if (refComment == null) {
+                        $(".footer")
+                            .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                    } else {
+                        $(".footer")
+                            .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                    }
                 } else {
-                    $(".footer")
-                        .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="width:100%;background:#F0F0F0;padding:5px 10px;border-radius:10px"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                    str = '';
+                    for (let i = 0; i < images.length; i++) {
+                        str += '<img src="' + images[i] + '">';
+                    }
+                    if (refComment == null) {
+                        $(".footer")
+                            .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><hr>');
+                    } else {
+                        $(".footer")
+                            .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><hr>');
+                    }
                 }
             }
         }
+        $(".comment-icon")
+            .click(function() {
+            window.location.href = "../userinfo/?user_id=" + $(this)
+                .attr("user_id") + "&post_id=" + $_GET["post_id"] + "&origin=post_content/;post_id";
+        });
         $(".htmlLoading")
             .slideUp("slow");
         /*处理表情*/
@@ -196,7 +286,7 @@ $(".left")
             .text("Loading···");
         $(".footer")
             .stop()
-            .fadeToggle();
+            .hide();
         $.getJSON("../../php/post/detail/ANDROID/4.1.8.php", {
             post_id: $_GET["post_id"],
             page_no: currPageNo - 1
@@ -212,32 +302,76 @@ $(".left")
                 text = comments[i].text;
                 createTime = timestampToTime(comments[i].createTime);
                 nick = comments[i].user.nick;
+                user_id = comments[i].user.userID;
+                age = comments[i].user.age;
+                level = comments[i].user.level;
+                levelColor = comments[i].user.levelColor;
+                gender = comments[i].user.gender;
+                identityColor = comments[i].user.identityColor;
+                identityTitle = comments[i].user.identityTitle;
                 avatar = comments[i].user.avatar;
                 seq = comments[i].seq;
                 refComment = comments[i].refComment;
                 images = comments[i].images;
                 text = text.replace(/\[/g, "<face>[<writeface>")
                     .replace(/\]/g, "</writeface>]</face>");
-                /*判断是评论否有图片,有则增加*/
-                if (images.length == 0) {
-                    if (refComment == null) {
-                        $(".footer")
-                            .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="white-space:pre-line;">' + text + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                if (gender == 2) {
+                    age = "♂" + age;
+                    ageColor = "#00CCF5";
+                } else if (gender == 1) {
+                    age = "♀" + age;
+                    ageColor = "#FF41A5";
+                }
+                if (levelColor == 0) {
+                    levelColor = '#19D469';
+                } else {
+                    levelColor = rgba2hex(levelColor);
+                }
+                if (identityTitle == "") {
+                    /*判断是评论否有图片,有则增加*/
+                    if (images.length == 0) {
+                        if (refComment == null) {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                        } else {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                        }
                     } else {
-                        $(".footer")
-                            .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="width:100%;background:#F0F0F0;padding:5px 10px;border-radius:10px"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;">' + text + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                        str = '';
+                        for (let i = 0; i < images.length; i++) {
+                            str += '<img src="' + images[i] + '">';
+                        }
+                        if (refComment == null) {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div><div class="flex comment-img">' + str + '</div></div><hr>');
+                        } else {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div><div class="flex comment-img">' + str + '</div></div><hr>');
+                        }
                     }
                 } else {
-                    str = '';
-                    for (let i = 0; i < images.length; i++) {
-                        str += '<img src="' + images[i] + '">';
-                    }
-                    if (refComment == null) {
-                        $(".footer")
-                            .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="white-space:pre-line;">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                    /*判断是评论否有图片,有则增加*/
+                    if (images.length == 0) {
+                        if (refComment == null) {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                        } else {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                        }
                     } else {
-                        $(".footer")
-                            .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="width:100%;background:#F0F0F0;padding:5px 10px;border-radius:10px"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                        str = '';
+                        for (let i = 0; i < images.length; i++) {
+                            str += '<img src="' + images[i] + '">';
+                        }
+                        if (refComment == null) {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><hr>');
+                        } else {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><hr>');
+                        }
                     }
                 }
                 $("writeface")
@@ -253,6 +387,11 @@ $(".left")
                     }
                 });
             }
+            $(".comment-icon")
+                .click(function() {
+                window.location.href = "../userinfo/?user_id=" + $(this)
+                    .attr("user_id") + "&post_id=" + $_GET["post_id"] + "&origin=post_content/;post_id";
+            });
             $(".comment-img img")
                 .click(function() {
                 $("#myModal")
@@ -267,15 +406,15 @@ $(".left")
                     .hide();
             });
             $('.content')
-            .animate({
-            scrollTop: 0
-        },0);
+                .animate({
+                scrollTop: 0
+            }, 0);
         });
         $(".footer")
             .stop()
-            .fadeToggle();
+            .show();
         if (currPageNo == 2) {
-            $(".body")
+            $(".body,.author")
                 .show();
         }
     }
@@ -283,7 +422,7 @@ $(".left")
 /*评论右翻页*/
 $(".right")
     .click(function() {
-    $(".body")
+    $(".body,.author")
         .hide();
     if (currPageNo < totalPage) {
         $(".middle")
@@ -306,32 +445,76 @@ $(".right")
                 text = comments[i].text;
                 createTime = timestampToTime(comments[i].createTime);
                 nick = comments[i].user.nick;
+                user_id = comments[i].user.userID;
+                age = comments[i].user.age;
+                level = comments[i].user.level;
+                levelColor = comments[i].user.levelColor;
+                gender = comments[i].user.gender;
+                identityColor = comments[i].user.identityColor;
+                identityTitle = comments[i].user.identityTitle;
                 avatar = comments[i].user.avatar;
                 seq = comments[i].seq;
                 images = comments[i].images;
                 refComment = comments[i].refComment;
                 text = text.replace(/\[/g, "<face>[<writeface>")
                     .replace(/\]/g, "</writeface>]</face>");
-                /*判断是评论否有图片,有则增加*/
-                if (images.length == 0) {
-                    if (refComment == null) {
-                        $(".footer")
-                            .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="white-space:pre-line;">' + text + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                if (gender == 2) {
+                    age = "♂" + age;
+                    ageColor = "#00CCF5";
+                } else if (gender == 1) {
+                    age = "♀" + age;
+                    ageColor = "#FF41A5";
+                }
+                if (levelColor == 0) {
+                    levelColor = '#19D469';
+                } else {
+                    levelColor = rgba2hex(levelColor);
+                }
+                if (identityTitle == "") {
+                    /*判断是评论否有图片,有则增加*/
+                    if (images.length == 0) {
+                        if (refComment == null) {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                        } else {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                        }
                     } else {
-                        $(".footer")
-                            .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="width:100%;background:#F0F0F0;padding:5px 10px;border-radius:10px"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;">' + text + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                        str = '';
+                        for (let i = 0; i < images.length; i++) {
+                            str += '<img src="' + images[i] + '">';
+                        }
+                        if (refComment == null) {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div><div class="flex comment-img">' + str + '</div></div><hr>');
+                        } else {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div><div class="flex comment-img">' + str + '</div></div><hr>');
+                        }
                     }
                 } else {
-                    str = '';
-                    for (let i = 0; i < images.length; i++) {
-                        str += '<img src="' + images[i] + '">';
-                    }
-                    if (refComment == null) {
-                        $(".footer")
-                            .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="white-space:pre-line;">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                    /*判断是评论否有图片,有则增加*/
+                    if (images.length == 0) {
+                        if (refComment == null) {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                        } else {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div></div><hr>');
+                        }
                     } else {
-                        $(".footer")
-                            .append('<div class="flex"><div><img class="comment-icon" src="' + avatar + '"></div><div style="overflow:hidden;" class="flex1"><div>' + nick + '</div><div style="font-size:10px;">' + createTime + '</div><div style="width:100%;background:#F0F0F0;padding:5px 10px;border-radius:10px"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><div style="padding:10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><hr>');
+                        str = '';
+                        for (let i = 0; i < images.length; i++) {
+                            str += '<img src="' + images[i] + '">';
+                        }
+                        if (refComment == null) {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="white-space:pre-line;" class="text">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><hr>');
+                        } else {
+                            $(".footer")
+                                .append('<div class="up flex"><div><img user_id="' + user_id + '" class="comment-icon" src="' + avatar + '"></div><div class="flex1"><div>' + nick + '</div><div class="flex"><div style="background:' + levelColor + ';" class="levelTag">LV' + level + '</div>&nbsp;<div style="background:' + ageColor + ';" class="ageTag">' + age + '</div>&nbsp;<div style="background:' + rgba2hex(identityColor) + ';" class="identityTitleTag">' + identityTitle + '</div></div><div style="font-size:10px;">' + createTime + '</div></div><div style="padding:10px 10px 10px 0;color:#008800;"><span>' + seq + '</span>楼</div></div><div style="padding-bottom:10px;" class="down flex1"><div style="background:#F0F0F0;padding:5px 10px;border-radius:10px" class="ref"><div>回复&nbsp;' + refComment.nick + '</div><div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">' + refComment.text + '</div></div><div style="white-space:pre-line;" class="text">' + text + '</div><div style="overflow-x:scroll;" class="flex comment-img">' + str + '</div></div><hr>');
+                        }
                     }
                 }
                 $("writeface")
@@ -347,6 +530,11 @@ $(".right")
                     }
                 });
             }
+            $(".comment-icon")
+                .click(function() {
+                window.location.href = "../userinfo/?user_id=" + $(this)
+                    .attr("user_id") + "&post_id=" + $_GET["post_id"] + "&origin=post_content/;post_id";
+            });
             $(".comment-img img")
                 .click(function() {
                 $("#myModal")
@@ -361,9 +549,9 @@ $(".right")
                     .hide();
             });
             $('.content')
-            .animate({
-            scrollTop: 0
-        },0);
+                .animate({
+                scrollTop: 0
+            }, 0);
         });
         $(".footer")
             .stop()

@@ -5,6 +5,12 @@
 .flex1 {
     flex:1
 }
+.color-white {
+    color:white;
+}
+.color-black {
+    color:black;
+}
 * {
     margin:0;
     font-size: 14px;
@@ -45,6 +51,12 @@ img {
     color:white;
     font-size:10px;
 }
+.levelTag ,.ageTag ,.identityTitleTag {
+    font-size:12px;
+    color:white;
+    padding:0 5px;
+    border-radius:5px;
+}
 .htmlLoading {
     padding:15px 0;
     background:#FAFAFA;
@@ -59,22 +71,18 @@ a:link {
     color: #2196F3
 }
 recommendtopics {
-color:#2196F3;
+    color:#2196F3;
 }
-/* 未被访问的链接 蓝色*/
-    a:visited {
+a:visited {
     color: #2196F3
 }
-/* 已被访问过的链接 蓝色*/
-    a:hover {
+a:hover {
     color: #2196F3
 }
-/* 鼠标悬浮在上的链接 蓝色*/
-    a:active {
+a:active {
     color: #2196F3
 }
-/* 鼠标点中激活链接 蓝色*/
-    /*单页样式*/
+/*单页样式*/
     .category .content .cate-container {
     width:100px;
     background:#F0F0F0;
@@ -177,22 +185,8 @@ color:#2196F3;
     overflow:hidden;
     text-overflow: ellipsis;
 }
-.post_content .content .head {
-    margin:10px 10px;
-}
-.post_content .content .body {
-    margin:10px 10px;
+.post_content .content {
     overflow-x:hidden;
-}
-.post_content .content .footer .flex .comment-icon {
-    width:50px;
-    height:50px;
-    margin:10px 0 10px 10px;
-    border-radius:40px;
-}
-.post_content .content .footer .flex .comment-img img {width:100px;height:100px;margin-right:10px;}
-.post_content .content .footer div div {
-    margin:10px 10px 10px 0;
 }
 .post_content .content .page-turn div {
     text-align:center;

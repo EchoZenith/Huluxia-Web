@@ -3,10 +3,10 @@ $(function() {
     This code by PeterCoast
     */
     let _key = $.cookie('Huluxia-Web-_key'), userID = $.cookie('Huluxia-Web-userID');
-    if (_key != null || _userID == null) {
+    if (_key != null && userID != null) {
         if ($_GET["user_id"] == null || $_GET["user_id"] == "") {
             if ($_GET["origin"] != null) {
-                window.location.href = "../" + $_GET["origin"];
+                window.location.href = "../" + getOrigin();
             } else {
                 window.location.href = "../category/";
             }
@@ -18,7 +18,7 @@ $(function() {
                 if (data.code == 103) {
                     //key已失效
                     alert("未登录");
-                    window.location.href = "../login/";
+                    window.location.href = "../login/?"+getAllPar;
                 } else if (data.code == null) {
                     if ($.cookie("Huluxia-Web-userID") == $_GET["user_id"]) {
                         $(".who")
@@ -39,11 +39,13 @@ $(function() {
                     age = data.age; //年龄
                     gender = data.gender; //性别(1女 2男)
                     level = data.level; //等级
+                    levelColor = data.levelColor;//等级颜色
                     integral = data.integral; //贡献值
                     integralNick = data.integralNick; //贡献名
                     credits = data.credits; //葫芦数
                     ipAddr = data.ipAddr; //ip属地
                     identityTitle = data.identityTitle; //称号
+                    identityColor = data.identityColor;//称号颜色
                     medalList = data.medalList; //勋章列表
                     photos = data.photos; //照片列表
                     signature = data.signature; //个性签名
@@ -51,18 +53,23 @@ $(function() {
                     school = data.schoolInfo; //学校
                     tags = data.tags; //标签
                     beenLocations = data.beenLocations; //去过的地方
-                    lastLoginTime = (Date.parse(new Date()) - data.lastLoginTime) / 3600000; //最后登录的时间（单位时）
-                    if (lastLoginTime > 8766) {
-                        lastLoginTime /= 8766;
+                    lastLoginTime = (Date.parse(new Date()) - data.lastLoginTime) / 60000; //最后登录的时间（单位分）
+                    if (lastLoginTime > 525960) {
+                        lastLoginTime /= 525960;
                         lastLoginTime = Math.round(lastLoginTime) + "年前";
-                    } else if (lastLoginTime > 730.5) {
-                        lastLoginTime /= 730.5;
+                    } else if (lastLoginTime > 43830) {
+                        lastLoginTime /= 43830;
                         lastLoginTime = Math.round(lastLoginTime) + "月前";
-                    } else if (lastLoginTime > 24.35) {
-                        lastLoginTime /= 30;
+                    } else if (lastLoginTime > 1461) {
+                        lastLoginTime /= 1800;
                         lastLoginTime = Math.round(lastLoginTime) + "天前";
-                    } else {
+                    } else if (lastLoginTime > 60) {
+                        lastLoginTime /= 60;
                         lastLoginTime = Math.round(lastLoginTime) + "时前";
+                    } else if (lastLoginTime > 15) {
+                        lastLoginTime = Math.round(lastLoginTime) + "分前";
+                    } else {
+                        lastLoginTime = "刚刚";
                     }
                     $("#post")
                         .text(postCount);
@@ -93,19 +100,20 @@ $(function() {
                         .text(ipAddr);
                     $("#lastTime")
                         .text(lastLoginTime);
-                    if (gender == 1) {
-                        age = "♀" + age;
+                    if (gender == 2) {
+                        $("#age")
+                        .text("♂" + age).css("background","#00CCF5");
                     } else {
-                        age = "♂" + age;
+                        $("#age")
+                        .text("♀" + age).css("background","#FF41A5");
                     }
-                    $("#age")
-                        .text(age);
+                    
                     if (identityTitle == "") {
                         $("#identity")
                             .hide();
                     } else {
                         $("#identity")
-                            .text(identityTitle);
+                            .text(identityTitle).css("background",rgba2hex(identityColor));
                     }
                     $("#level span")
                         .text(level);
@@ -124,24 +132,40 @@ $(function() {
                     $("#signature")
                         .text(signature);
                     if (space != null) {
-                        $(".userInfo")
-                            .css({
-                            'background-image': 'url("' + space.imgurl + '")',
-                            'background-size': 'cover'
-                        });
+                        if (space.id == 0) {
+                            $("#null")
+                                .css({
+                                'background-image': 'url("' + space.imgurl + '")',
+                                'background-size': 'cover'
+                            });
+                            $("#userinfo,#tags,#beenLocations,#perInfo,#photos,#medalList").css({"background":"rgb(255,255,255)"});
+                            $(".color-white").each(function(){
+                                $(this).removeClass("color-white");
+                                $(this).addClass("color-black");
+                            });
+                            $(".userInfo").css({"background":"rgb(240,240,240)"});
+                        } else {
+                            $(".userInfo")
+                                .css({
+                                'background-image': 'url("' + space.imgurl + '")',
+                                'background-size': 'cover'
+                            });
+                        }
+                    } else if(space==null) {
+                        $(".userInfo").css({'background-image':'url("../../assets/img/bg_profile.png")','background-size':'cover'});
                     }
                     if (hometown != null && hometown.hometown_city != "无") {
                         $("#hometown")
                             .text(hometown.hometown_city + "-" + hometown.hometown_province);
                     }
-                    if (school != null && school.school_name != "") {
+                    if (school != null && school.school_enteryear != 0 && school.school_name != "") {
                         $("#school")
                             .text(school.school_name + "-" + school.school_enteryear);
                     }
                     if (tags.length != 0) {
                         $("#tags")
                             .show();
-                        $("#tag div span")
+                        $("#tags div span")
                             .text(tags.length);
                         for (let i = 0; i < tags.length; i++) {
                             $("#tags .flex")
@@ -165,7 +189,7 @@ $(function() {
                 } else if (data.code == 104) {
                     alert("用户不存在");
                     if ($_GET["origin"] != null || $_GET["origin"] != "") {
-                        window.location.href = "../" + $_GET["origin"];
+                        window.location.href = "../" + getOrigin();
                     } else {
                         window.location.href = "../category/";
                     }
@@ -174,6 +198,6 @@ $(function() {
         }
     } else {
         alert("未登录");
-        window.location.href = "../login/";
+        window.location.href = "../login/?"+getAllPar;
     }
 });
