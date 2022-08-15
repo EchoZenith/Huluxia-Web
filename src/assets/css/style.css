@@ -83,7 +83,7 @@ a:active {
     color: #2196F3
 }
 .isClickBackground:active {
-    background:rgba(40,40,40,0.8);
+    background:rgb(238,238,238);
 }
 /*单页样式*/
     .category .content .cate-container {

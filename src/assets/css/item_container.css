@@ -22,13 +22,16 @@
     color:#008800;
 }
 .post-list .post-list-item {
-    height:120px;
-    width:100%;
+    height:100px;
+    padding:10px 10px;
 }
 .post-list .post-list-item div .post-icon {
     width:100px;
     height:100px;
-    margin:10px 10px;
+    margin-right:10px;
+}
+.post-title{
+    overflow:hidden;
 }
 .head div .flex span img {
     height:20px;

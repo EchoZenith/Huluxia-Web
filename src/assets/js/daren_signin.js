@@ -32,10 +32,10 @@ $(function() {
             }
             if (identityTitle == "") {
                 $(".signin .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal">签到<span>' + weektotal + '</span>天</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal">签到<span>' + weektotal + '</span>天</div></div><hr>');
             } else {
                 $(".signin .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:' + rgba2hex(identityColor) + '" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal">签到<span>' + weektotal + '</span>天</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:' + rgba2hex(identityColor) + '" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal">签到<span>' + weektotal + '</span>天</div></div><hr>');
             }
             $(".item")
                 .click(function() {
@@ -83,10 +83,10 @@ $(".signin .flex .flex .bf")
             }
             if (identityTitle == "") {
                 $(".signin .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal">签到<span>' + weektotal + '</span>天</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal">签到<span>' + weektotal + '</span>天</div></div><hr>');
             } else {
                 $(".signin .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:' + rgba2hex(identityColor) + '" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal">签到<span>' + weektotal + '</span>天</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:' + rgba2hex(identityColor) + '" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal">签到<span>' + weektotal + '</span>天</div></div><hr>');
             }
             $(".item")
                 .click(function() {

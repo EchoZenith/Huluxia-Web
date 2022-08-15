@@ -207,6 +207,12 @@ $(function() {
                         .slideUp("slow");
                     $(".content")
                         .show("slow");
+                    $("#integral").click(function(){
+                        window.location.href="../cgourd/?user_id="+$_GET["user_id"]+"&origin=userinfo/;user_id&type=c&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&integral="+integral;
+                    });
+                    $("#credits").click(function(){
+                        window.location.href="../cgourd/?user_id="+$_GET["user_id"]+"&origin=userinfo/;user_id&type=g&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&credits="+credits;
+                    });
                     if ($.cookie("Huluxia-Web-userID") != $_GET["user_id"]) {
                         $(".ftools")
                             .show();

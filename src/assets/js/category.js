@@ -7,7 +7,7 @@ $(function() {
         for (let i = 0; i < categoryforum.length; i++) {
             fum_id = categoryforum[i].id;
             title = categoryforum[i].title;
-            str += '<div fum_id="' + fum_id + '" class="getItem">' + title + '</div>';
+            str += '<div fum_id="' + fum_id + '" class="getItem isClickBackground">' + title + '</div>';
         }
         $(".cate-container")
             .html(str);
@@ -30,7 +30,7 @@ $(function() {
                     cat_id = categories[i]["categoryID"];
                     viewCountFormated = categories[i]["viewCountFormated"];
                     postCountFormated = categories[i]["postCountFormated"];
-                    str += '<div fum_id="' + fum_id + '" cat_id="' + cat_id + '" class="flex toFum"><div><img src="' + icon + '"/></div><div class="flex info flex-column"><div>' + title + '</div><div><span>热度：</span><span>' + viewCountFormated + '</span><span> 话题：</span><span>' + postCountFormated + '</span></div></div></div><hr>';
+                    str += '<div fum_id="' + fum_id + '" cat_id="' + cat_id + '" class="flex isClickBackground toFum"><div><img src="' + icon + '"/></div><div class="flex info flex-column"><div>' + title + '</div><div><span>热度：</span><span>' + viewCountFormated + '</span><span> 话题：</span><span>' + postCountFormated + '</span></div></div></div><hr>';
                 }
                 $(".zone-content")
                     .html(str);

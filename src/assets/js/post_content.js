@@ -428,7 +428,8 @@ $(".right")
         $(".footer")
             .stop()
             .fadeToggle();
-            $(".body,.author").hide();
+        $(".body,.author")
+            .hide();
         $.getJSON("../../php/post/detail/ANDROID/4.1.8.php", {
             post_id: $_GET["post_id"],
             page_no: currPageNo + 1

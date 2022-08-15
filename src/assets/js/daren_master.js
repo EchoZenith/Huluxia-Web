@@ -32,10 +32,10 @@ $(function() {
             }
             if (identityTitle == "") {
                 $(".master .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
             } else {
                 $(".master .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:'+rgba2hex(identityColor)+'" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:'+rgba2hex(identityColor)+'" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
             }
         }
         $(".item-list")
@@ -82,10 +82,10 @@ $(".master .flex .flex .bf")
             }
             if (identityTitle == "") {
                 $(".master .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
             } else {
                 $(".master .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:'+rgba2hex(identityColor)+'" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:'+rgba2hex(identityColor)+'" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
             }
         }
         $(".master .flex .flex .bf")

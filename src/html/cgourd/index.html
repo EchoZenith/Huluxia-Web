@@ -4,21 +4,34 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
 <title>title</title>
 <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
-<!-- <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script> -->
 <link rel="stylesheet" href="../../assets/css/style.css">
-<!-- <link rel="stylesheet" href="../../assets/css/login.css"> -->
 <style>
 .cgourd{
-margin:10px 10px;
+    margin:10px 10px;
 }
 hr{
-margin:10px 0;
+    margin:10px 0;
+}
+#c,#gourd {
+    overflow-y:scroll;
+    height:calc(100% - 70px);
+}
+#nick div,#age div,#rightInfo {
+    font-size:12px;
 }
 </style>
 </head>
 <body class="cgourd">
-    <div></div>
-    <div style="display:none;" id="c">
+    <div style="height:60px" class="flex">
+        <div><img id="avatar" style="height:50px;margin:0 10px 10px 0;border-radius:25px" src=""></div>
+        <div class="flex1">
+            <div class="flex" id="nick"><div>nick</div></div>
+            <div class="flex" id="age"><div class="ageTag">age</div></div>
+        </div>
+        <div class="flex"><span id="rightInfo" style="align-self:center;color:rgb(249,183,0)"></span></div>
+    </div>
+    <hr style="margin:0 0 10px 0;">
+    <div style="display:none" class="flex1" id="c">
         <b>贡献值是什么？</b>
         <div>"贡献值“是葫芦侠社区用户鼓励大家参与社区秩序和环境维护的积分。</div>
         <hr>
@@ -37,20 +50,20 @@ margin:10px 0;
         <hr>
         <b>贡献称号等级明细</b>
         <table>
-        <tr><td>L1（500）</td><td>初入门槛</td></tr>
-        <tr><td>L2（1250）</td><td>籍籍无名</td></tr>
-        <tr><td>L3（2500）</td><td>鲜有人知</td></tr>
-        <tr><td>L4（5000）</td><td>一鸣惊人</td></tr>
-        <tr><td>L5（10000）</td><td>震惊百里</td></tr>
-        <tr><td>L6（20000）</td><td>众人皆知</td></tr>
-        <tr><td>L7（30000）</td><td>超凡入圣</td></tr>
-        <tr><td>L8（45000）</td><td>傲视群雄</td></tr>
-        <tr><td>L9（55000）</td><td>独步天下</td></tr>
-        <tr><td>L10（75000）</td><td>一代宗师</td></tr>
-        <tr><td>L11（150000）</td><td>翻云覆雨</td></tr>
-        <tr><td>L12（300000）</td><td>谁与争锋</td></tr>
-        <tr><td>L13（600000）</td><td>天下无双</td></tr>
-        <tr><td>L14（1200000）</td><td>独孤求败</td></tr>
+            <tr><td>L1（500）</td><td>初入门槛</td></tr>
+            <tr><td>L2（1250）</td><td>籍籍无名</td></tr>
+            <tr><td>L3（2500）</td><td>鲜有人知</td></tr>
+            <tr><td>L4（5000）</td><td>一鸣惊人</td></tr>
+            <tr><td>L5（10000）</td><td>震惊百里</td></tr>
+            <tr><td>L6（20000）</td><td>众人皆知</td></tr>
+            <tr><td>L7（30000）</td><td>超凡入圣</td></tr>
+            <tr><td>L8（45000）</td><td>傲视群雄</td></tr>
+            <tr><td>L9（55000）</td><td>独步天下</td></tr>
+            <tr><td>L10（75000）</td><td>一代宗师</td></tr>
+            <tr><td>L11（150000）</td><td>翻云覆雨</td></tr>
+            <tr><td>L12（300000）</td><td>谁与争锋</td></tr>
+            <tr><td>L13（600000）</td><td>天下无双</td></tr>
+            <tr><td>L14（1200000）</td><td>独孤求败</td></tr>
         </table>
     </div>
     <div style="display:none;" id="gourd">
@@ -67,13 +80,26 @@ margin:10px 0;
         <div>使用贡献背景因达不到使用贡献称号条件的可以使用“葫芦”购买贡献背景; 通过“葫芦”购买的贡献背景可以永久使用，不受贡献称号掉级或切换背景、模式的限制。</div>
     </div>
 </body>
+<script src="../../assets/js/index.js"></script>
 <!-- <script src="../../assets/js/cgourd.js"></script> -->
 <script>
 $(function(){
+    $("#avatar").attr("src",$_GET["avatar"]);
+    $("#nick div").text(decodeURI($_GET["nick"]));
+    switch($_GET["gender"]){
+        case "1":
+            $("#age div").text("♀" + $_GET["age"]).css("background", "#FF41A5");
+            break;
+        case "2":
+            $("#age div").text("♂" + $_GET["age"]).css("background", "#00CCF5");
+            break;
+    }
     if($_GET["type"]=="c"){
         $("#c").show();
+        $("#rightInfo").text($_GET["integral"]+"贡献值");
     } else if($_GET["type"]=="g"){
         $("#gourd").show();
+        $("#rightInfo").text($_GET["credits"]+"葫芦数");
     } else {
         if($_GET["origin"]!=null||$_GET["origin"]!="") {
             window.location.href = "../"+$_GET["origin"]+"/?origin=cgourd";
@@ -81,7 +107,6 @@ $(function(){
             window.location.href = "../category/?origin=cgourd";
         }
     }
-})
-
+});
 </script>
 </html>

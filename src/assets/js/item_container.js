@@ -112,9 +112,9 @@ $(function() {
                 nick = posts.user.nick;
                 postID = posts.postID;
                 if (posts.images.length == 0) {
-                    str += '<div post_id="' + postID + '" class="flex isClickBackground post-list-item"><div class="flex post-title flex-column"><div style="padding:10px 10px" class="flex1">' + title + '</div><div style="padding:10px 10px">' + nick + '</div></div></div><hr>';
+                    str += '<div post_id="' + postID + '" class="flex isClickBackground post-list-item"><div class="flex flex-column post-title"><div class="flex1">' + title + '</div><div height="20px">' + nick + '</div></div></div><hr>';
                 } else {
-                    str += '<div post_id="' + postID + '" class="flex isClickBackground post-list-item"><div><img class="post-icon" src="' + images + '" /></div><div class="flex post-title flex-column"><div style="margin:10px 0" class="flex1">' + title + '</div><div style="margin:10px 0" height="20px">' + nick + '</div></div></div><hr>';
+                    str += '<div post_id="' + postID + '" class="flex isClickBackground post-list-item"><div><img class="post-icon" src="' + images + '"></div><div class="flex flex-column post-title"><div class="flex1">' + title + '</div><div height="20px">' + nick + '</div></div></div><hr>';
                 }
             }
             $(".bf")
