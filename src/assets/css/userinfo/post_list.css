@@ -1,0 +1,22 @@
+.post-list-item {
+    height:100px;
+    padding:10px 10px;
+}
+.post-list-item div .post-icon {
+    width:100px;
+    height:100px;
+    margin-right:10px;
+}
+.post-title {
+overflow:hidden;
+}
+.post-title div{
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+.content {
+    overflow-y:scroll;
+    overflow-x:hidden;
+    display:none;
+}

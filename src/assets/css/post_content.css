@@ -8,7 +8,8 @@ img {
     margin:0
 }
 .content {
-    overflow:scroll
+    overflow-x:hidden;
+    overflow-y:scroll;
 }
 .comment-img {
     flex-wrap:wrap;
@@ -162,6 +163,10 @@ to {
 }
 .down {
     margin-left:70px;
+}
+.down .text {
+
+margin-right:10px;
 }
 .page-turn div:active {
     background:rgba(40,40,40,0.8);

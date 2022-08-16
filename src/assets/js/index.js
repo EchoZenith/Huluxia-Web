@@ -53,6 +53,6 @@ var getAllPar = (function(){
 
 function rgba2hex(rgba) {
     var hex = rgba.toString(16);
-    var color = '#' + hex.slice(2);
+    var color = '#' + hex.slice(hex.length-6);
     return color;
 }

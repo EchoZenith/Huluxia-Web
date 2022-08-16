@@ -203,6 +203,12 @@ $(function() {
                                 .append('<div>' + beenLocations[i] + '</div>');
                         }
                     }
+                    
+                    $("#post").click(function(){
+                        window.location.href = "../user_post_list/?origin=userInfo/;user_id&user_id="+$_GET["user_id"];
+                    });
+                    
+                    
                     $(".htmlLoading")
                         .slideUp("slow");
                     $(".content")
