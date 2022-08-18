@@ -1,0 +1,42 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
+<title>title</title>
+<script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<!-- <link rel="stylesheet" href="../../assets/css/userinfo/post_list.css"> -->
+<style>
+.item {
+    height:80px;
+    width:100%;
+}
+.item div img {
+    width:60px;
+    height:60px;
+    margin:10px 10px;
+    border-radius:40px;
+}
+.item .info {
+    height:60px;
+    margin:10px 10px;
+}
+.content {
+    overflow-y:scroll;
+    height:calc(100% - 50px);
+}
+</style>
+</head>
+<body>
+    <div class="htmlLoading">Loading···</div>
+    <div style="font-size:15px;height:50px;align-items:center;justify-content:center" class="flex"><span></span>列表</div><hr>
+    <div class="flex flex-column content">
+        <div class="flex flex1 item-list flex-column">
+        <!-- 列表 -->
+            <div start="0" class="bf isClickBackground" style="padding:10px 0;text-align:center;">加载更多</div>
+        </div>
+    </div>
+</body>
+<script src="../../assets/js/index.js"></script>
+<script src="../../assets/js/userinfo/follow.js"></script>
+</html>

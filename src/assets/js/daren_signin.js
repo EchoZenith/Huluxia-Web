@@ -40,7 +40,7 @@ $(function() {
             $(".item")
                 .click(function() {
                 window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&cat_id=" + $_GET["cat_id"] + "&origin=daren/;cat_id";
+                    .attr("user_id") + "&origin=daren/;;;cat_id;;"+$_GET["cat_id"];
             });
         }
         $(".item-list")
@@ -91,7 +91,7 @@ $(".signin .flex .flex .bf")
             $(".item")
                 .click(function() {
                 window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&cat_id=" + $_GET["cat_id"] + "&origin=daren/;cat_id";
+                    .attr("user_id") + "&origin=daren/;;;cat_id;;"+$_GET["cat_id"];
             });
         }
         $(".signin .flex .flex .bf")

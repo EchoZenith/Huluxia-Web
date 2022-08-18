@@ -205,19 +205,24 @@ $(function() {
                     }
                     
                     $("#post").click(function(){
-                        window.location.href = "../user_post_list/?origin=userInfo/;user_id&user_id="+$_GET["user_id"];
-                    });
-                    
+                        window.location.href = "../user_post_list/?user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                    });//帖子按钮点击
+                    $("#following").click(function(){
+                        window.location.href = "../user_follow/?type=1&user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                    });//关注按钮点击
+                    $("#follower").click(function(){
+                        window.location.href = "../user_follow/?type=2&user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                    });//粉丝按钮点击
                     
                     $(".htmlLoading")
                         .slideUp("slow");
                     $(".content")
                         .show("slow");
                     $("#integral").click(function(){
-                        window.location.href="../cgourd/?user_id="+$_GET["user_id"]+"&origin=userinfo/;user_id&type=c&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&integral="+integral;
+                        window.location.href="../cgourd/?user_id="+$_GET["user_id"]+"&origin=userinfo/;;;user_id;;"+$_GET["user_id"]+"&type=c&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&integral="+integral;
                     });
                     $("#credits").click(function(){
-                        window.location.href="../cgourd/?user_id="+$_GET["user_id"]+"&origin=userinfo/;user_id&type=g&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&credits="+credits;
+                        window.location.href="../cgourd/?origin=userinfo/;;;user_id;;"+$_GET["user_id"]+"&type=g&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&credits="+credits;
                     });
                     if ($.cookie("Huluxia-Web-userID") != $_GET["user_id"]) {
                         $(".ftools")

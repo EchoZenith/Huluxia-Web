@@ -65,7 +65,7 @@ $(function() {
         $(".author")
             .click(function() {
             window.location.href = "../userinfo/?user_id=" + $(this)
-                .attr("user_id") + "&post_id=" + $_GET["post_id"] + "&origin=post_content/;post_id";
+                .attr("user_id") + "&origin=post_content/;;;post_id;;"+$_GET["post_id"];
         });
         $(".body")
             .html(detail);
@@ -243,7 +243,7 @@ $(function() {
         $(".comment-icon")
             .click(function() {
             window.location.href = "../userinfo/?user_id=" + $(this)
-                .attr("user_id") + "&post_id=" + $_GET["post_id"] + "&origin=post_content/;post_id";
+                .attr("user_id") + "&origin=post_content/;;;post_id;;"+$_GET["post_id"];
         });
         $(".htmlLoading")
             .slideUp("slow");
@@ -390,7 +390,7 @@ $(".left")
             $(".comment-icon")
                 .click(function() {
                 window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&post_id=" + $_GET["post_id"] + "&origin=post_content/;post_id";
+                    .attr("user_id") + "&origin=post_content/;;;post_id;;"+$_GET["post_id"];
             });
             $(".comment-img img")
                 .click(function() {
@@ -533,7 +533,7 @@ $(".right")
             $(".comment-icon")
                 .click(function() {
                 window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&post_id=" + $_GET["post_id"] + "&origin=post_content/;post_id";
+                    .attr("user_id") + "&origin=post_content/;;;post_id;;"+$_GET["post_id"];
             });
             $(".comment-img img")
                 .click(function() {

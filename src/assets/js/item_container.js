@@ -38,7 +38,7 @@ $(function() {
             _key = $.cookie("Huluxia-Web-_key");
             if (_key == null) {
                 alert("未登录");
-                window.location.href = "../login/?cat_id=" + $_GET["cat_id"] + "&origin=item_container/;cat_id";
+                window.location.href = "../login/?origin=item_container/;;;cat_id;;"+$_GET["cat_id"];
             } else {
                 $.getJSON("../../php/user/signin/ANDROID/4.0.php", {
                     _key: _key,
@@ -53,7 +53,7 @@ $(function() {
                             path: '/'
                         });
                         alert("未登录");
-                        window.location.href = "../login/?cat_id=" + $_GET["cat_id"] + "&origin=item_container/;cat_id";
+                        window.location.href = "../login/?origin=item_container/;;;cat_id;;"+$_GET["cat_id"];
                     } else {
                         $("#signin")
                             .attr("signin", "yes");

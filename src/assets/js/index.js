@@ -23,22 +23,11 @@ function timestampToTime(timestamp) {
         return Y+M+D+h+m+s;
 }
 function getOrigin() {
-    if($_GET!=null) {
-        let originObj = $_GET["origin"].split(";");
-        if(originObj.length>1) {
-            let obj = originObj[1].split(","),str = '',c;
-            for(let i=0;i<obj.length;i++){
-                if(obj[i] in $_GET){
-                    c = obj[i];
-                    str += obj[i]+"="+$_GET[c]+"&";
-                }
-            }
-            return originObj[0]+"?"+str;
-        } else {
-            return originObj[0];
-        }
+    if($_GET["origin"]!=null&&$_GET["origin"]!="") {
+        let originlink=$_GET["origin"].replace(/;;;/g,'?').replace(/;;/g,'=').replace(/;/g,'&');
+        return originlink;
     } else {
-        return "";
+        return '';
     }
 }
 var getAllPar = (function(){

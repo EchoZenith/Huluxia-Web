@@ -152,16 +152,21 @@ a:active {
 }
 .daren div .content {
     overflow:scroll;
+    height:calc(100% - 50px);
 }
 .daren .head {
-    padding:10px 0;
+    height:50px;
     background:#FAFAFA;
 }
 .daren .head div .flex {
     justify-content:center;
+    display:flex;
 }
 .daren .head div .flex span {
     text-align:center;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
     font-size:20px;
 }
 .daren div .flex .item-list .item .weektotal {

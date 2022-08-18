@@ -19,8 +19,6 @@ $(function(){
                     let _key=data._key, userID=data.user.userID,nick=data.user.nick,avatar=data.user.avatar;
                     $.cookie("Huluxia-Web-_key",_key,{ expires: 30,path:'/' });
                     $.cookie("Huluxia-Web-userID",userID,{ expires: 30,path:'/' });
-                    $.cookie("Huluxia-Web-nick",nick,{ expires: 30,path:'/' });
-                    $.cookie("Huluxia-Web-avatar",avatar,{ expires: 30,path:'/' });
                     window.location.href="../"+getOrigin();
                 } else if(data.code==102) {
                     /*参数不合法*/
