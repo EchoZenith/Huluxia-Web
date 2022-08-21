@@ -213,6 +213,9 @@ $(function() {
                     $("#follower").click(function(){
                         window.location.href = "../user_follow/?type=2&user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
                     });//粉丝按钮点击
+                    $("#favorite").click(function(){
+                        window.location.href = "../user_post_list/?type=favorite&user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                    });//收藏按钮点击
                     
                     $(".htmlLoading")
                         .slideUp("slow");

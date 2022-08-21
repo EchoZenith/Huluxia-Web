@@ -1,5 +1,5 @@
 /*通用样式*/
-    .flex {
+.flex {
     display:flex
 }
 .flex1 {
@@ -86,7 +86,7 @@ a:active {
     background:rgb(238,238,238);
 }
 /*单页样式*/
-    .category .content .cate-container {
+.category .content .cate-container {
     width:100px;
     background:#F0F0F0;
     height:100%;
