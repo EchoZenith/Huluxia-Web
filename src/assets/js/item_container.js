@@ -32,12 +32,12 @@ $(function() {
         .click(function() {
         if ($(this)
             .attr("signin") == "yes") {
-            alert("已经签到过了");
+            Toast("已经签到过了",500);
         } else if ($(this)
             .attr("signin") == "no") {
             _key = $.cookie("Huluxia-Web-_key");
             if (_key == null) {
-                alert("未登录");
+                //Toast("未登录",500);
                 window.location.href = "../login/?origin=item_container/;;;cat_id;;"+$_GET["cat_id"];
             } else {
                 $.getJSON("../../php/user/signin/ANDROID/4.0.php", {
@@ -52,13 +52,14 @@ $(function() {
                         $.removeCookie("Huluxia-Web-userID", {
                             path: '/'
                         });
-                        alert("未登录");
+                        //Toast("未登录",500);
                         window.location.href = "../login/?origin=item_container/;;;cat_id;;"+$_GET["cat_id"];
                     } else {
                         $("#signin")
                             .attr("signin", "yes");
                         $("#signinText")
                             .text("已签到");
+                        Toast("签到成功",500);
                     }
                 });
             }

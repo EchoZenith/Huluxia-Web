@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
         <title>title</title>
         <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
         <link rel="stylesheet" href="../../assets/css/style.css">
         <link rel="stylesheet" href="../../assets/css/post_content.css">
     </head>
@@ -45,9 +46,19 @@
             <hr>
             <div class="flex page-turn">
                 <!-- page turn -->
-                <div class="flex1 left">&lt;</div>
-                <div class="flex1 middle">1/1</div>
-                <div class="flex1 right">&gt;</div>
+                <div class="flex flex1">
+                    <div class="flex flex1"><img src="../../assets/img/icon_topic_detail_floor.png" id="floor"></div>
+                    <div class="flex flex1"><img src="../../assets/img/ic_home_favorite.png" id="favorite" isFavorite="0"></div>
+                    <div class="flex flex1"><img src="../../assets/img/btn_comment_praise.png" id="like"></div>
+                </div>
+                <div class="flex flex1">
+                    <div class="flex flex1 left">&lt;</div>
+                    <div class="flex flex1 middle">1/1</div>
+                    <div class="flex flex1 right">&gt;</div>
+                </div>
+                <div class="flex flex1">
+                    <div class="flex flex1"><!-- 评论 --></div>
+                </div>
             </div>
             <div id="myModal" class="modal">
                 <!-- 关闭按钮 -->
@@ -58,11 +69,6 @@
             </div>
         </div>
     </body>
-    <style>
-    .page-tutn{
-        align-items : flex-end;
-    }
-    </style>
     <script src="../../assets/js/index.js"></script>
     <script src="../../assets/js/post_content.js"></script>
 </html>

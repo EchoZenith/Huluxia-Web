@@ -115,23 +115,6 @@ a:active {
     height:50px;
     margin:10px 10px
 }
-.post_content .content {
-    overflow-x:hidden;
-}
-.post_content .content .page-turn div {
-    text-align:center;
-    padding:10px;
-}
-.post_content .content .page-turn .left {
-    color:#008800;
-    font-size:20px;
-    font-weight:bold;
-}
-.post_content .content .page-turn .right {
-    font-size:20px;
-    font-weight:bold;
-    color:#008800;
-}
 .daren div .content .item-list .item {
     height:80px;
     width:100%;

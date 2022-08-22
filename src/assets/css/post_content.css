@@ -9,19 +9,19 @@ img {
 }
 .content {
     overflow-x:hidden;
-    overflow-y:scroll;
+    overflow-y:scroll
 }
 .comment-img {
-    flex-wrap:wrap;
+    flex-wrap:wrap
 }
 .comment-img img {
     width:calc((100% - 20px) / 3);
     margin:5px 5px 0 0;
     object-fit:cover;
-    aspect-ratio:1/1;
+    aspect-ratio:1/1
 }
 .comment-img img:nth-of-type(3n+0) {
-    margin-right:10px;
+    margin-right:10px
 }
 .comment-img img,.body img {
     border-radius:5px;
@@ -101,8 +101,7 @@ to {
     .modal-content {
     width:100%
 }
-}
-.tag .level {
+}.tag .level {
     padding:0 5px;
     background:rgb(25,212,105);
     border-radius:5px;
@@ -140,34 +139,52 @@ to {
     width:50px;
     height:50px;
     margin:10px 0 10px 10px;
-    border-radius:40px;
+    border-radius:40px
 }
 .footer div .flex .flex1 {
-    margin-top:10px;
+    margin-top:10px
 }
 .footer div div .flex1 {
-    margin:10px 10px;
+    margin:10px 10px
 }
 .ref {
-    margin:10px 10px 10px 0;
+    margin:10px 10px 10px 0
 }
 .ref div {
     margin:10px 0;
-    text-overflow: ellipsis;
+    text-overflow:ellipsis
 }
 .body,.head {
-    margin:10px 10px;
+    margin:10px 10px
 }
 .up .flex1 {
-    margin-top:10px;
+    margin-top:10px
 }
 .down {
-    margin-left:70px;
+    margin-left:70px
 }
 .down .text {
-
-margin-right:10px;
+    margin-right:10px
 }
-.page-turn div:active {
-    background:rgba(40,40,40,0.8);
+.page-tutn {
+    align-items:flex-end
+}
+.page-turn div div:active {
+    color:rgb(255,255,255)
+}
+.page-turn div div {
+    align-items:center;
+    justify-content:center;
+    padding:10px;
+    height:25px
+}
+.page-turn div div img {
+    height:25px;
+    width:25px;
+    border-radius:0
+}
+.page-turn div .left,.page-turn div .right {
+    color:#008800;
+    font-size:20px;
+    font-weight:bold
 }

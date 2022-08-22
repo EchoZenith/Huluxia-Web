@@ -247,7 +247,7 @@ $(function() {
                                     $(".follow")
                                         .text("已关注")
                                         .attr("ship", "1")
-                                        .css("color", "rgb(255,255,255)");
+                                        .css("color", "rgb(172,172,172)");
                                     break;
                                 case 2:
                                     //互关
@@ -274,6 +274,7 @@ $(function() {
                                         .text("互相关注")
                                         .attr("ship", "2")
                                         .css("color", "rgb(25,212,105)");
+                                        Toast("关注成功",500);
                                         break;
                                     case "1":
                                         $.getJSON("http://floor.huluxia.com/friendship/unfollow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
@@ -281,6 +282,7 @@ $(function() {
                                         .text("关注")
                                         .attr("ship", "3")
                                         .css("color", "rgb(249,183,0)");
+                                        Toast("取消关注成功",500);
                                         break;
                                     case "2":
                                         $.getJSON("http://floor.huluxia.com/friendship/unfollow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
@@ -288,19 +290,21 @@ $(function() {
                                         .text("关注")
                                         .attr("ship", "0")
                                         .css("color", "rgb(249,183,0)");
+                                        Toast("取消关注成功",500);
                                         break;
                                     case "3":
                                     $.getJSON("http://floor.huluxia.com/friendship/follow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
                                     $(".follow")
                                         .text("已关注")
                                         .attr("ship", "1")
-                                        .css("color", "rgb(255,255,255)");
+                                        .css("color", "rgb(172,172,172)");
+                                        Toast("关注成功",500);
                                         break;
                                 }
                             });
                             $(".complaint").click(function(){
                                 $.getJSON("http://floor.huluxia.com/complaint/ANDROID/4.0?jsoncallback=?",{_key,_key,file_id:$_GET["user_id"]},function() {
-                                    alert("已举报");
+                                    Toast("举报成功",500);
                                 });
                             });
                         });

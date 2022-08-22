@@ -65,7 +65,7 @@ $(function() {
         $(".author")
             .click(function() {
             window.location.href = "../userinfo/?user_id=" + $(this)
-                .attr("user_id") + "&origin=post_content/;;;post_id;;"+$_GET["post_id"];
+                .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
         });
         $(".body")
             .html(detail);
@@ -243,7 +243,7 @@ $(function() {
         $(".comment-icon")
             .click(function() {
             window.location.href = "../userinfo/?user_id=" + $(this)
-                .attr("user_id") + "&origin=post_content/;;;post_id;;"+$_GET["post_id"];
+                .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
         });
         $(".htmlLoading")
             .slideUp("slow");
@@ -276,14 +276,136 @@ $(function() {
             $("#myModal")
                 .hide();
         });
+        $.getJSON("http://floor.huluxia.com/post/praise/check/ANDROID/2.1?jsoncallback=?", {
+            _key: $.cookie('Huluxia-Web-_key'),
+            post_id: $_GET["post_id"]
+        }, function(data) {
+            switch (data.isPraise) {
+                case 1:
+                    /*已点赞*/
+                    $("#like")
+                        .attr("src", "../../assets/img/btn_comment_praised.png")
+                    break;
+                case 0:
+                    /*未点赞*/
+                    $("#like")
+                        .attr("src", "../../assets/img/btn_comment_praise.png");
+                    break;
+            }
+        });
+        $.getJSON("http://floor.huluxia.com/post/favorite/check/ANDROID/2.0?jsoncallback=?", {
+            _key: $.cookie('Huluxia-Web-_key'),
+            post_id: $_GET["post_id"]
+        }, function(data) {
+            switch (data.isFavorite) {
+                case 1:
+                    /*已收藏*/
+                    $("#favorite")
+                        .attr("isFavorite", "1")
+                        .attr("src", "../../assets/img/ic_home_favoriteed.png")
+                    break;
+                case 0:
+                    /*未收藏*/
+                    $("#favorite")
+                        .attr("isFavorite", "0")
+                        .attr("src", "../../assets/img/ic_home_favorite.png");
+                    break;
+            }
+        });
     });
 });
-/*评论左翻页*/
+$("#like")
+    .click(function() {
+    /*点赞*/
+    $.getJSON("http://floor.huluxia.com/post/praise/ANDROID/2.1?jsoncallback=?", {
+        _key: $.cookie('Huluxia-Web-_key'),
+        post_id: $_GET["post_id"]
+    }, function(data) {
+        switch (data.status) {
+            case 1:
+                switch (data.praise) {
+                    case 1:
+                        /*点赞成功*/
+                        $("#like")
+                            .attr("src", "../../assets/img/btn_comment_praised.png");
+                        break;
+                    case 2:
+                        /*取消点赞成功*/
+                        $("#like")
+                            .attr("src", "../../assets/img/btn_comment_praise.png");
+                        break;
+                }
+                break;
+            case 0:
+                switch (data.code) {
+                    case 103:
+                        /*未登录*/
+                        window.location.href = "../login/?origin=post_content/;;;post_id;;" + $_GET["post_id"];
+                        break;
+                    default:
+                        Toast(data.msg, 500);
+                        break;
+                }
+                break;
+        }
+    });
+});
+$("#favorite")
+    .click(function() {
+    /*收藏*/
+    switch ($(this)
+        .attr("isFavorite")) {
+        case "0":
+            /*未收藏*/
+            Furl = "../../php/post/favorite/create/ANDROID/4.1.8.php";
+            break;
+        case "1":
+            /*已收藏*/
+            Furl = "http://floor.huluxia.com/post/favorite/destroy/ANDROID/4.1.8?jsoncallback=?";
+            break;
+    }
+    $.getJSON(Furl, {
+        _key: $.cookie('Huluxia-Web-_key'),
+        post_id: $_GET["post_id"]
+    }, function(data) {
+        switch (data.status) {
+            case 1:
+                switch ($("#favorite")
+                    .attr("isFavorite")) {
+                    case "0":
+                        /*收藏成功*/
+                        $("#favorite")
+                            .attr("isFavorite", "1")
+                            .attr("src", "../../assets/img/ic_home_favoriteed.png");
+                        break;
+                    case "1":
+                        /*取消收藏成功*/
+                        $("#favorite")
+                            .attr("isFavorite", "0")
+                            .attr("src", "../../assets/img/ic_home_favorite.png");
+                        break;
+                }
+                break;
+            case 0:
+                switch (data.code) {
+                    case 103:
+                        /*未登录*/
+                        window.location.href = "../login/?origin=post_content/;;;post_id;;" + $_GET["post_id"];
+                        break;
+                    default:
+                        Toast(data.msg, 500);
+                        break;
+                }
+                break;
+        }
+    });
+});
 $(".left")
     .click(function() {
+    /*评论左翻页*/
     if (currPageNo > 1) {
-        $(".middle")
-            .text("Loading···");
+        /*$(".middle")
+            .text("Loading···");*/
         $(".footer")
             .stop()
             .hide();
@@ -390,7 +512,7 @@ $(".left")
             $(".comment-icon")
                 .click(function() {
                 window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&origin=post_content/;;;post_id;;"+$_GET["post_id"];
+                    .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
             });
             $(".comment-img img")
                 .click(function() {
@@ -419,12 +541,12 @@ $(".left")
         }
     }
 });
-/*评论右翻页*/
 $(".right")
     .click(function() {
+    /*评论右翻页*/
     if (currPageNo < totalPage) {
-        $(".middle")
-            .text("Loading···");
+        /*$(".middle")
+            .text("Loading···");*/
         $(".footer")
             .stop()
             .fadeToggle();
@@ -533,7 +655,7 @@ $(".right")
             $(".comment-icon")
                 .click(function() {
                 window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&origin=post_content/;;;post_id;;"+$_GET["post_id"];
+                    .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
             });
             $(".comment-img img")
                 .click(function() {
