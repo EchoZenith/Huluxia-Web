@@ -314,6 +314,18 @@ $(function() {
         });
     });
 });
+$("#floor").click(function() {
+    switch($(this).attr("isFloor")) {
+        case "0":
+            $("#floor").attr("isFloor","1").attr("src","../../assets/img/icon_topic_detail_floor_selected.png");
+            break;
+        case "1":
+            $("#floor").attr("isFloor","0").attr("src","../../assets/img/icon_topic_detail_floor.png");
+            break;
+    }
+                currPageNo = 2;
+            $(".left").click();
+});
 $("#like")
     .click(function() {
     /*点赞*/
@@ -409,13 +421,22 @@ $(".left")
         $(".footer")
             .stop()
             .hide();
-        $.getJSON("../../php/post/detail/ANDROID/4.1.8.php", {
+            switch($("#floor").attr("isFloor")){
+                case "0":
+                    Furl = "../../php/post/detail/ANDROID/4.1.8.php";
+                    break;
+                case "1":
+                    Furl = "http://floor.huluxia.com/post/detail/floor/ANDROID/4.1.8?jsoncallback=?";
+                    break;
+            }
+        $.getJSON(Furl, {
             post_id: $_GET["post_id"],
             page_no: currPageNo - 1
         }, function(data) {
             let comments = '', text = '', createTime = '', nick = '', avatar = '', str = '';
             comments = data["comments"];
             currPageNo = data["currPageNo"];
+            totalPage = data["totalPage"];
             $(".middle")
                 .text(currPageNo + "/" + totalPage);
             $(".footer")
@@ -552,13 +573,22 @@ $(".right")
             .fadeToggle();
         $(".body,.author")
             .hide();
-        $.getJSON("../../php/post/detail/ANDROID/4.1.8.php", {
+                        switch($("#floor").attr("isFloor")){
+                case "0":
+                    Furl = "../../php/post/detail/ANDROID/4.1.8.php";
+                    break;
+                case "1":
+                    Furl = "http://floor.huluxia.com/post/detail/floor/ANDROID/4.1.8?jsoncallback=?";
+                    break;
+            }
+        $.getJSON(Furl, {
             post_id: $_GET["post_id"],
             page_no: currPageNo + 1
         }, function(data) {
             let comments = '', text = '', createTime = '', nick = '', avatar = '', str = '';
             comments = data["comments"];
             currPageNo = data["currPageNo"];
+            totalPage = data["totalPage"];
             $(".middle")
                 .text(currPageNo + "/" + totalPage);
             $(".footer")
@@ -593,7 +623,7 @@ $(".right")
                     levelColor = rgba2hex(levelColor);
                 }
                 if (identityTitle == "") {
-                    /*判断是评论否有图片,有则增加*/
+                    //判断是评论否有图片,有则增加
                     if (images.length == 0) {
                         if (refComment == null) {
                             $(".footer")
@@ -616,7 +646,7 @@ $(".right")
                         }
                     }
                 } else {
-                    /*判断是评论否有图片,有则增加*/
+                    //判断是评论否有图片,有则增加
                     if (images.length == 0) {
                         if (refComment == null) {
                             $(".footer")
