@@ -1,0 +1,50 @@
+#info {
+    align-items:center;
+    padding-bottom:35px;
+    background:rgb(0,207,81)
+}
+#info div img {
+    height:80px;
+    width:80px;
+    margin-top:30px;
+    border-radius:40px
+}
+#follow {
+    background:rgb(255,255,255);
+    margin:10px 10px;
+    margin-top:-30px;
+    border-radius:5px
+}
+#follow div {
+    height:60px;
+    padding:5px 0;
+    align-items:center;
+    justify-content:center
+}
+#func {
+    background:rgb(255,255,255);
+    flex:1
+}
+#func .flex {
+    padding:15px 10px
+}
+#func .flex div img {
+    height:30px;
+    width:30px;
+    border-radius:0
+}
+.text {
+    display:flex;
+    margin:0 10px;
+    align-items:center
+}
+hr {
+    margin:0 0 0 50px
+}
+body {
+    background:rgb(240,240,240)
+}
+#nick {
+    color:rgb(255,255,255);
+    font-weight:bold
+}

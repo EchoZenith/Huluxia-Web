@@ -31,6 +31,7 @@ $(function() {
         commentCount = post.commentCount;
         updateTime = timestampToTime(post.updateTime);
         recommendTopics = post.recommendTopics;
+        scorelist = post.scorelist;//葫芦相关（以后实现）
         detail = detail.replace(/<image>/g, "<img src=")
             .replace(/<\/image>/g, ">");
         $(".middle")
