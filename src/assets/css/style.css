@@ -1,4 +1,5 @@
 /*通用样式*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300&display=swap');
 .flex {
     display:flex
 }
@@ -14,6 +15,7 @@
 * {
     margin:0;
     font-size: 14px;
+    font-family: 'Noto Serif SC', serif;
 }
 .flex-column {
     flex-direction:column;

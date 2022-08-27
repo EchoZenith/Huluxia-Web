@@ -31,7 +31,7 @@ $(function() {
         commentCount = post.commentCount;
         updateTime = timestampToTime(post.updateTime);
         recommendTopics = post.recommendTopics;
-        scorelist = post.scorelist;//葫芦相关（以后实现）
+        scorelist = post.scorelist; //葫芦相关（以后实现）
         detail = detail.replace(/<image>/g, "<img src=")
             .replace(/<\/image>/g, ">");
         $(".middle")
@@ -179,7 +179,8 @@ $(function() {
             seq = comments[i].seq;
             images = comments[i].images;
             refComment = comments[i].refComment;
-            text = text.replace(/\[/g, "<face>[<writeface>")
+            text = text.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
+                .replace(/\[/g, "<face>[<writeface>")
                 .replace(/\]/g, "</writeface>]</face>");
             if (gender == 2) {
                 age = "♂" + age;
@@ -315,17 +316,24 @@ $(function() {
         });
     });
 });
-$("#floor").click(function() {
-    switch($(this).attr("isFloor")) {
+$("#floor")
+    .click(function() {
+    switch ($(this)
+        .attr("isFloor")) {
         case "0":
-            $("#floor").attr("isFloor","1").attr("src","../../assets/img/icon_topic_detail_floor_selected.png");
+            $("#floor")
+                .attr("isFloor", "1")
+                .attr("src", "../../assets/img/icon_topic_detail_floor_selected.png");
             break;
         case "1":
-            $("#floor").attr("isFloor","0").attr("src","../../assets/img/icon_topic_detail_floor.png");
+            $("#floor")
+                .attr("isFloor", "0")
+                .attr("src", "../../assets/img/icon_topic_detail_floor.png");
             break;
     }
-                currPageNo = 2;
-            $(".left").click();
+    currPageNo = 2;
+    $(".left")
+        .click();
 });
 $("#like")
     .click(function() {
@@ -422,14 +430,15 @@ $(".left")
         $(".footer")
             .stop()
             .hide();
-            switch($("#floor").attr("isFloor")){
-                case "0":
-                    Furl = "../../php/post/detail/ANDROID/4.1.8.php";
-                    break;
-                case "1":
-                    Furl = "http://floor.huluxia.com/post/detail/floor/ANDROID/4.1.8?jsoncallback=?";
-                    break;
-            }
+        switch ($("#floor")
+            .attr("isFloor")) {
+            case "0":
+                Furl = "../../php/post/detail/ANDROID/4.1.8.php";
+                break;
+            case "1":
+                Furl = "http://floor.huluxia.com/post/detail/floor/ANDROID/4.1.8?jsoncallback=?";
+                break;
+        }
         $.getJSON(Furl, {
             post_id: $_GET["post_id"],
             page_no: currPageNo - 1
@@ -457,7 +466,8 @@ $(".left")
                 seq = comments[i].seq;
                 refComment = comments[i].refComment;
                 images = comments[i].images;
-                text = text.replace(/\[/g, "<face>[<writeface>")
+                text = text.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
+                    .replace(/\[/g, "<face>[<writeface>")
                     .replace(/\]/g, "</writeface>]</face>");
                 if (gender == 2) {
                     age = "♂" + age;
@@ -574,14 +584,15 @@ $(".right")
             .fadeToggle();
         $(".body,.author")
             .hide();
-                        switch($("#floor").attr("isFloor")){
-                case "0":
-                    Furl = "../../php/post/detail/ANDROID/4.1.8.php";
-                    break;
-                case "1":
-                    Furl = "http://floor.huluxia.com/post/detail/floor/ANDROID/4.1.8?jsoncallback=?";
-                    break;
-            }
+        switch ($("#floor")
+            .attr("isFloor")) {
+            case "0":
+                Furl = "../../php/post/detail/ANDROID/4.1.8.php";
+                break;
+            case "1":
+                Furl = "http://floor.huluxia.com/post/detail/floor/ANDROID/4.1.8?jsoncallback=?";
+                break;
+        }
         $.getJSON(Furl, {
             post_id: $_GET["post_id"],
             page_no: currPageNo + 1
@@ -609,7 +620,8 @@ $(".right")
                 seq = comments[i].seq;
                 images = comments[i].images;
                 refComment = comments[i].refComment;
-                text = text.replace(/\[/g, "<face>[<writeface>")
+                text = text.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
+                    .replace(/\[/g, "<face>[<writeface>")
                     .replace(/\]/g, "</writeface>]</face>");
                 if (gender == 2) {
                     age = "♂" + age;
