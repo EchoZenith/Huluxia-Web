@@ -34,75 +34,6 @@ recommendtopics {
 .comment-img img:hover,.body img:hover,recommendtopics:hover {
     opacity:0.7
 }
-/*.modal {
-    display:none;
-    position:fixed;
-    z-index:1;
-    padding-top:100px;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    overflow:auto;
-    background-color:rgb(0,0,0);
-    background-color:rgba(0,0,0,0.9)
-}
-.modal-content {
-    margin:auto;
-    display:block;
-    width:80%;
-    max-width:700px
-}
-#caption {
-    margin:auto;
-    display:block;
-    width:80%;
-    max-width:700px;
-    text-align:center;
-    color:#ccc;
-    padding:10px 0;
-    height:150px
-}
-.modal-content,#caption {
-    -webkit-animation-name:zoom;
-    -webkit-animation-duration:0.6s;
-    animation-name:zoom;
-    animation-duration:0.6s
-}
-@-webkit-keyframes zoom {
-    from {
-    -webkit-transform:scale(0)
-}
-to {
-    -webkit-transform:scale(1)
-}
-}@keyframes zoom {
-    from {
-    transform:scale(0)
-}
-to {
-    transform:scale(1)
-}
-}.close {
-    position:absolute;
-    top:15px;
-    right:35px;
-    color:#f1f1f1;
-    font-size:40px;
-    font-weight:bold;
-    transition:0.3s
-}
-.close:hover,.close:focus {
-    color:#bbb;
-    text-decoration:none;
-    cursor:pointer
-}
-@media only screen and (max-width:700px) {
-    .modal-content {
-    width:100%
-}
-}*/
-
 .tag .level {
     padding:0 5px;
     background:rgb(25,212,105);
@@ -171,14 +102,18 @@ to {
 .page-turn {
     align-items:flex-end
 }
+.page-turn div {
+    width:calc(100% / 3);
+    padding:10px;
+}
 .page-turn div div:active {
     color:rgb(255,255,255)
 }
 .page-turn div div {
     align-items:center;
     justify-content:center;
-    padding:10px;
-    height:25px
+    padding:0px;
+    height:25px;
 }
 .page-turn div div img {
     height:25px;
@@ -189,4 +124,31 @@ to {
     color:#008800;
     font-size:20px;
     font-weight:bold
+}
+#comment {
+    width:100%;
+    border-radius:15px;
+    padding:5px;
+    background:rgb(240,240,240);
+    color:rgb(150,150,150);
+    align-items:center;
+    font-weight:bold;
+}
+#send {
+    border-radius:15px;
+    padding:5px 10px 5px 10px;
+    background:rgb(0,202,76);
+    color:rgb(255,255,255);
+    align-items:center;
+    margin-left:10px;
+    font-weight:bold;
+}
+#commentInput{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    background-color:rgba(0,0,0,0.65);
+    align-items:flex-end;
 }

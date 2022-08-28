@@ -5,6 +5,9 @@
 .flex1 {
     flex:1
 }
+.flexgrow1{
+    flex-grow:1
+}
 .color-white {
     color:white
 }

@@ -273,10 +273,26 @@ $(function() {
             $(".maskweap")
                 .fadeIn();
         });
+        $("#comment")
+            .click(function() {
+            $(".page-turn")
+                .fadeOut();
+            $("#commentInput")
+                .fadeIn();
+            $("#input").focus();
+        });
         $(document)
             .mousedown(function(e) {
-                $(".maskweap")
-                    .fadeOut(); //弹窗关闭
+            $(".maskweap")
+                .fadeOut();
+            if ($(e.target)
+                .parent("#commentInput div")
+                .length == 0) {
+                $("#commentInput")
+                    .fadeOut();
+                $(".page-turn")
+                    .fadeIn();
+            }
         });
         $.getJSON("http://floor.huluxia.com/post/praise/check/ANDROID/2.1?jsoncallback=?", {
             _key: $.cookie('Huluxia-Web-_key'),
@@ -546,19 +562,19 @@ $(".left")
                 window.location.href = "../userinfo/?user_id=" + $(this)
                     .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
             });
-        $(".comment-img img,.body img")
-            .click(function() {
-            $(".bigimg")
-                .attr("src", $(this)
-                .attr('src'));
-            $(".maskweap")
-                .fadeIn();
-        });
-        $(document)
-            .mousedown(function(e) {
+            $(".comment-img img,.body img")
+                .click(function() {
+                $(".bigimg")
+                    .attr("src", $(this)
+                    .attr('src'));
+                $(".maskweap")
+                    .fadeIn();
+            });
+            $(document)
+                .mousedown(function(e) {
                 $(".maskweap")
                     .fadeOut(); //弹窗关闭
-        });
+            });
             $('.content')
                 .animate({
                 scrollTop: 0
@@ -700,19 +716,19 @@ $(".right")
                 window.location.href = "../userinfo/?user_id=" + $(this)
                     .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
             });
-        $(".comment-img img,.body img")
-            .click(function() {
-            $(".bigimg")
-                .attr("src", $(this)
-                .attr('src'));
-            $(".maskweap")
-                .fadeIn();
-        });
-        $(document)
-            .mousedown(function(e) {
+            $(".comment-img img,.body img")
+                .click(function() {
+                $(".bigimg")
+                    .attr("src", $(this)
+                    .attr('src'));
+                $(".maskweap")
+                    .fadeIn();
+            });
+            $(document)
+                .mousedown(function(e) {
                 $(".maskweap")
                     .fadeOut(); //弹窗关闭
-        });
+            });
             $('.content')
                 .animate({
                 scrollTop: 0
