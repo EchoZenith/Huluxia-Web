@@ -1,0 +1,29 @@
+.cate-container {
+    width:100px;
+    background:#F0F0F0;
+    height:100%;
+    overflow:sceoll
+}
+.cate-container div {
+    border-bottom-style:solid;
+    margin-bottom:1px;
+    height:40px;
+    text-align:center;
+    line-height:40px;
+    font-size:15px
+}
+.zone-content {
+    background:#FFFFFF;
+    height:100%;
+    overflow:scroll
+}
+.zone-content .flex .info {
+    margin:10px 10px 10px 0;
+}
+.zone-content .flex .info div span {
+    font-size:10px;
+}
+.zone-content .flex div img {
+    height:50px;
+    margin:10px 10px
+}

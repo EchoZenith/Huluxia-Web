@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300&display=swap');
+    .flex {
+    display:flex
+}
+.flex1 {
+    flex:1
+}
+.color-white {
+    color:white
+}
+.color-black {
+    color:black
+}
+* {
+    margin:0;
+    font-size:14px;
+    font-family:'Noto Serif SC',serif
+}
+.flex-column {
+    flex-direction:column
+}
+.content {
+    height:100%;
+    overflow:hidden
+}
+hr {
+    margin:0 10px;
+    border:0.5px solid #E5E5E5
+}
+img {
+    border-radius:10px;
+    object-fit:cover
+}
+.boyAgeTag {
+    padding:0 5px;
+    border-radius:5px;
+    background:#00CCF5;
+    color:white;
+    font-size:10px
+}
+.girlAgeTag {
+    padding:0 5px;
+    border-radius:5px;
+    background:#FF41A5;
+    color:white;
+    font-size:10px
+}
+.identityTag {
+    padding:0 5px;
+    border-radius:5px;
+    background:red;
+    color:white;
+    font-size:10px
+}
+.levelTag,.ageTag,.identityTitleTag {
+    font-size:12px;
+    color:white;
+    padding:0 5px;
+    border-radius:5px
+}
+.htmlLoading {
+    padding:15px 0;
+    background:#FAFAFA;
+    text-align:center
+}
+a {
+    color:#2196F3;
+    text-decoration:none;
+    font-weight:bold
+}
+a:link {
+    color:#2196F3
+}
+recommendtopics {
+    color:#2196F3
+}
+a:visited {
+    color:#2196F3
+}
+a:hover {
+    color:#2196F3
+}
+a:active {
+    color:#2196F3
+}
+.isClickBackground:active {
+    background:rgb(238,238,238)
+}
+.maskweap {
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    background-color:rgba(0,0,0,0.8);
+    display:flex;
+    display:-webkit-flex;
+    -webkit-justify-content:center;
+    justify-content:center;
+    -webkit-align-items:center;
+    align-items:center;
+    display:none
+}
+.maskweap .imgshow {
+    width:100%;
+    box-sizing:border-box;
+    height:100%;
+    display:flex;
+    display:-webkit-flex;
+    -webkit-align-items:center;
+    align-items:center;
+    -webkit-justify-content:center;
+    justify-content:center
+}
+.maskweap .imgshow img {
+    display:block;
+    width:auto;
+    max-width:100%;
+    max-height:95%;
+    box-sizing:border-box;
+    padding:5px;
+    background-color:#FFFFFF
+}

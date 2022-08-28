@@ -1,0 +1,41 @@
+.daren div .content .item-list .item {
+    height:80px;
+    width:100%;
+}
+.daren div .content .item-list .item .img img {
+    width:60px;
+    height:60px;
+    margin:10px 10px;
+    border-radius:40px;
+}
+.daren div .content .item-list .item .info {
+    height:60px;
+    margin:10px 10px;
+}
+.daren div .content .item-list .item .seq {
+    line-height:80px;
+    margin-left:10px;
+}
+.daren div .content {
+    overflow:scroll;
+    height:calc(100% - 50px);
+}
+.daren .head {
+    background:#FAFAFA;
+}
+.daren .head div .flex {
+    justify-content:center;
+    margin:10px 0;
+}
+.daren .head div .flex div {
+    font-size:20px;
+}
+.daren div .flex .item-list .item .weektotal {
+    height:60px;
+    margin:30px 12px;
+    font-size:12px;
+}
+.daren div .flex .item-list .item .weektotal span {
+    color:#F0BB00;
+    font-size:12px;
+}

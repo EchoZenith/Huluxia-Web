@@ -1,0 +1,18 @@
+.item {
+    height:80px;
+    width:100%;
+}
+.item div img {
+    width:60px;
+    height:60px;
+    margin:10px 10px;
+    border-radius:40px;
+}
+.item .info {
+    height:60px;
+    margin:10px 10px;
+}
+.content {
+    overflow-y:scroll;
+    height:calc(100% - 50px);
+}

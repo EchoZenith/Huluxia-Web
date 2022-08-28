@@ -4,22 +4,8 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
 <title>title</title>
 <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" href="../../assets/css/style.css">
-<style>
-.cgourd{
-    margin:10px 10px;
-}
-hr{
-    margin:10px 0;
-}
-#c,#gourd {
-    overflow-y:scroll;
-    height:calc(100% - 70px);
-}
-#nick div,#age div,#rightInfo {
-    font-size:12px;
-}
-</style>
+<link rel="stylesheet" href="../../assets/css/index.css">
+<link rel="stylesheet" href="../../assets/css/cgourd.css">
 </head>
 <body class="cgourd">
     <div style="height:60px" class="flex">
@@ -81,32 +67,5 @@ hr{
     </div>
 </body>
 <script src="../../assets/js/index.js"></script>
-<!-- <script src="../../assets/js/cgourd.js"></script> -->
-<script>
-$(function(){
-    $("#avatar").attr("src",$_GET["avatar"]);
-    $("#nick div").text(decodeURI($_GET["nick"]));
-    switch($_GET["gender"]){
-        case "1":
-            $("#age div").text("♀" + $_GET["age"]).css("background", "#FF41A5");
-            break;
-        case "2":
-            $("#age div").text("♂" + $_GET["age"]).css("background", "#00CCF5");
-            break;
-    }
-    if($_GET["type"]=="c"){
-        $("#c").show();
-        $("#rightInfo").text($_GET["integral"]+"贡献值");
-    } else if($_GET["type"]=="g"){
-        $("#gourd").show();
-        $("#rightInfo").text($_GET["credits"]+"葫芦数");
-    } else {
-        if($_GET["origin"]!=null||$_GET["origin"]!="") {
-            window.location.href = "../"+$_GET["origin"]+"/?origin=cgourd";
-        } else {
-            window.location.href = "../category/?origin=cgourd";
-        }
-    }
-});
-</script>
+<script src="../../assets/js/cgourd.js"></script>
 </html>
