@@ -14,6 +14,7 @@ $(function() {
         window.currPageNo = data.currPageNo;
         voice = post.voice;
         user = post.user;
+        state = post.state;//帖子状态1正常,2删除,3锁定
         auser_id = user.userID
         anick = user.nick;
         aavatar = user.avatar;
@@ -74,92 +75,98 @@ $(function() {
             .html('<div>' + title + '</div><div style="font-size:10px;">' + updateTime + '</div><div><span style="font-size:10px;">阅读：</span><span style="font-size:10px;">' + hit + '</span><span style="font-size:10px;"> 评论：</span><span style="font-size:10px;">' + commentCount + '</span></div>');
         $(".commentCount")
             .text(commentCount);
-        if (postType == 4 || postType == 1) {
-            /*图文混编*/
-            /*处理帖子中的链接,表情,图片*/
-            $(".body text")
-                .each(function() {
-                $(this)
-                    .html($(this)
-                    .html()
-                    .replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
-                    .replace(/\[/g, "<face>[<writeface>")
-                    .replace(/\]/g, "</writeface>]</face>"));
-
-            });
-            $(".body img")
-                .each(function() {
-                let pic = $(this)
-                    .attr('src');
-                $(this)
-                    .attr('src', pic.substring(0, pic.indexOf(",")));
-            });
-            if (recommendTopics != null) {
-                for (let i = 0; i < recommendTopics.length; i++) {
-                    $(".body text")
-                        .each(function() {
-                        $(this)
-                            .html($(this)
+        if(state==1){
+            if (postType == 4 || postType == 1) {
+                /*图文混编*/
+                /*处理帖子中的链接,表情,图片*/
+                $(".body text")
+                    .each(function() {
+                    $(this)
+                        .html($(this)
+                        .html()
+                        .replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
+                        .replace(/\[/g, "<face>[<writeface>")
+                        .replace(/\]/g, "</writeface>]</face>"));
+    
+                });
+                $(".body img")
+                    .each(function() {
+                    let pic = $(this)
+                        .attr('src');
+                    $(this)
+                        .attr('src', pic.substring(0, pic.indexOf(",")));
+                });
+                if (recommendTopics != null) {
+                    for (let i = 0; i < recommendTopics.length; i++) {
+                        $(".body text")
+                            .each(function() {
+                            $(this)
+                                .html($(this)
+                                .html()
+                                .replace("&lt;", "&amp;lt;")
+                                .replace("&gt;", "&amp;gt;")
+                                .replace(recommendTopics[i].title.replace("<", "&amp;lt;")
+                                .replace(">", "&amp;gt;"), '<recommendTopics post_id="' + recommendTopics[i].postID + '">' + recommendTopics[i].title.replace("&amp;lt;", "&lt;")
+                                .replace("&amp;gt;", "&gt;") + '</recommendTopics>')
+                                .replace("&amp;lt;", "&lt;")
+                                .replace("&amp;gt;", "&gt;"));
+                        });
+                    }
+                }
+            } else if (postType == 0 || postType == 3) {
+                /*普通模式*/
+                /*处理帖子中的链接,表情,图片*/
+                $(".body")
+                    .each(function() {
+                    $(this)
+                        .html($(this)
+                        .html()
+                        .replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
+                        .replace(/\[/g, "<face>[<writeface>")
+                        .replace(/\]/g, "</writeface>]</face>"));
+    
+                });
+                if (recommendTopics != null) {
+                    for (let i = 0; i < recommendTopics.length; i++) {
+                        $(".body")
+                            .html($(".body")
                             .html()
                             .replace("&lt;", "&amp;lt;")
                             .replace("&gt;", "&amp;gt;")
                             .replace(recommendTopics[i].title.replace("<", "&amp;lt;")
-                            .replace(">", "&amp;gt;"), '<recommendTopics post_id="' + recommendTopics[i].postID + '">' + recommendTopics[i].title.replace("&amp;lt;", "&lt;")
-                            .replace("&amp;gt;", "&gt;") + '</recommendTopics>')
+                            .replace(">", "&amp;gt;"), '<recommendTopics post_id="' + recommendTopics[i].postID + '">' + recommendTopics[i].title + '</recommendTopics>')
                             .replace("&amp;lt;", "&lt;")
                             .replace("&amp;gt;", "&gt;"));
-                    });
+                    }
                 }
             }
-        } else if (postType == 0 || postType == 3) {
-            /*普通模式*/
-            /*处理帖子中的链接,表情,图片*/
-            $(".body")
-                .each(function() {
-                $(this)
-                    .html($(this)
-                    .html()
-                    .replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
-                    .replace(/\[/g, "<face>[<writeface>")
-                    .replace(/\]/g, "</writeface>]</face>"));
-
-            });
-            if (recommendTopics != null) {
-                for (let i = 0; i < recommendTopics.length; i++) {
+            /*判断是否有视频，有就添加视频播放器*/
+            if (voice == "") {
+                for (let i = 0; i < images.length; i++) {
                     $(".body")
-                        .html($(".body")
-                        .html()
-                        .replace("&lt;", "&amp;lt;")
-                        .replace("&gt;", "&amp;gt;")
-                        .replace(recommendTopics[i].title.replace("<", "&amp;lt;")
-                        .replace(">", "&amp;gt;"), '<recommendTopics post_id="' + recommendTopics[i].postID + '">' + recommendTopics[i].title + '</recommendTopics>')
-                        .replace("&amp;lt;", "&lt;")
-                        .replace("&amp;gt;", "&gt;"));
+                        .append('<img src="' + images[i] + '">');
                 }
+            } else {
+                voice = JSON.parse(voice);
+                $(".video-player video")
+                    .attr("src", voice["videohost"] + voice["videofid"]);
+                $(".video-player video")
+                    .slideDown("slow");
+                $(".video-player video")
+                    .attr("poster", voice["imghost"] + voice["imgfid"]);
             }
+        } else if(state==2) {
+            $("#comment").text("已删除");
+        } else if(state==3) {
+            $("#comment").text("已锁定");
         }
         $(".content")
-            .fadeToggle("slow");
-        $("recommendtopics")
-            .click(function() {
-            window.location.href = "../post_content/?post_id=" + $(this)
-                .attr("post_id");
-        });
-        /*判断是否有视频，有就添加视频播放器*/
-        if (voice == "") {
-            for (let i = 0; i < images.length; i++) {
-                $(".body")
-                    .append('<img src="' + images[i] + '">');
-            }
-        } else {
-            voice = JSON.parse(voice);
-            $(".video-player video")
-                .attr("src", voice["videohost"] + voice["videofid"]);
-            $(".video-player video")
-                .slideDown("slow");
-            $(".video-player video")
-                .attr("poster", voice["imghost"] + voice["imgfid"]);
-        }
+                .fadeToggle("slow");
+            $("recommendtopics")
+                .click(function() {
+                window.location.href = "../post_content/?post_id=" + $(this)
+                    .attr("post_id");
+            });
         /*加载评论*/
         let str = '', text, seq, createTime, nick, avatar;
         $(".footer")
@@ -254,16 +261,33 @@ $(function() {
             window.face = data;
             $("writeface")
                 .each(function() {
-                for (let i = 0; i < face["count"]; i++) {
+                for (let i = 0; i < face.count; i++) {
                     if (face["text"][i] == $(this)
                         .text()) {
                         $(this)
                             .parent()
-                            .html("<img class='writeface' style='width:20px;' src='" + face["png"][i] + "'>");
+                            .html("<img class='writeface' style='width:20px;' src='" + face.png[i] + "'>");
                         break;
                     }
                 }
             });
+            let str = '';
+            for (let i = 0; i < face.count; i++) {
+                str += '<img class="face" name="' + face.text[i] + '" src="' + face.png[i] + '"/>';
+            }
+            $(".emotion")
+                .html(str);
+        $(".face").click(function(){
+        var r,re;
+            var s = $("#input").val();
+            re = /\[?\]/ig;
+            r = s.match(re);
+            if(r==null||r.length<14){
+                $("#input").val($("#input").val()+"["+$(this).attr("name")+"]");
+            } else {
+                Toast("一次最多发送15个表情噢~",1000);
+            }
+        });
         });
         $(".comment-img img,.body img")
             .click(function() {
@@ -275,16 +299,26 @@ $(function() {
         });
         $("#comment")
             .click(function() {
+            if(state==1) {
             $(".page-turn")
                 .fadeOut();
             $("#commentInput")
                 .fadeIn();
-            $("#input").focus();
+            $("#input")
+                .focus();
+            }
         });
         $(document)
             .mousedown(function(e) {
             $(".maskweap")
                 .fadeOut();
+            if ($(e.target)
+                .parent(".emotion")
+                .length == 0) {
+                $(".emotion")
+                    .parent()
+                    .hide(0);
+            }
             if ($(e.target)
                 .parent("#commentInput div")
                 .length == 0) {
@@ -293,6 +327,12 @@ $(function() {
                 $(".page-turn")
                     .fadeIn();
             }
+        });
+        $("#emotion")
+            .click(function() {
+            $(".emotion")
+                .parent()
+                .show(0);
         });
         $.getJSON("http://floor.huluxia.com/post/praise/check/ANDROID/2.1?jsoncallback=?", {
             _key: $.cookie('Huluxia-Web-_key'),

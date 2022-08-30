@@ -65,15 +65,20 @@
                 </div>
             </div>
             <div class="flex" style="display:none;" id="commentInput">
-                <div style="background:white;width:100%;">
-                    <div style="align-items:flex-end;margin:10px 10px;" class="flex">
+                <div style="padding:10px 10px;background:white;width:100%;">
+                    <div style="align-items:flex-end;" class="flex">
                         <div class="flex1"><textarea id="input" placeholder="回复" style="width:100%" rows="3"></textarea></div>
                         <div comment_id="0" style="height:100%" id="send">发送</div>
                     </div>
-                    <div class="flex" style="margin:0 10px 10px 10px;">
-                        <div><img style="width:30px;height:30px;margin-right:5px;" src="../../assets/img/topic_emotion_icon.png"></div>
+                    <div class="flex">
+                        <div><img emotion="0" id="emotion" style="width:30px;height:30px;margin-right:5px;" src="../../assets/img/topic_emotion_icon.png"></div>
                         <div><img style="width:30px;height:30px;margin-right:5px;" src="../../assets/img/topic_camera_icon.png"></div>
                         <div><img style="width:30px;height:30px;" src="../../assets/img/topic_remind_icon.png"></div>
+                    </div>
+                    <div style="display:none" class="flex"><!-- 表情 -->
+                        <div class="flex emotion">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,38 +95,68 @@
     $(function(){
         $("#send").click(function(){
             let text = $("#input").val();
-            $.getJSON("http://floor.huluxia.com/comment/create/ANDROID/2.0?jsoncallback=?",{
-                _key:$.cookie('Huluxia-Web-_key'),
-                comment_id:$("#send").attr("comment_id"),
-                post_id:$_GET["post_id"],
-                text:text
-            },function(data){
-                console.log(data);
-                switch(data.status){
-                    case 1:
-                        break;
-                    case 0:
-                        switch(data.code){
-                            case 103:
-                                //未登录
-                                window.location.href="../login/?origin=post_content/;;;post_id;;"+$_GET["post_id"];
-                                break;
-                        }
-                        break;
-                    default:
-                        Toast(data.msg,1000);
-                        $("#input").val("");
-                        $("#commentInput")
-                            .fadeOut();
-                        $(".page-turn")
-                            .fadeIn();
-                        $("#send").attr("comment_id","0");
-                        break;
-                }
-            });
+            if(text.length<5){
+                Toast("内容不能少于5个字符",1000);
+            } else {
+                $.getJSON("http://floor.huluxia.com/comment/create/ANDROID/2.0?jsoncallback=?",{
+                    _key:$.cookie('Huluxia-Web-_key'),
+                    comment_id:$("#send").attr("comment_id"),
+                    post_id:$_GET["post_id"],
+                    text:text
+                },function(data){
+                    console.log(data);
+                    switch(data.status){
+                        case 1:
+                            Toast(data.msg,1000);
+                            $("#input").val("");
+                            $("#commentInput")
+                                .fadeOut();
+                            $(".page-turn")
+                                .fadeIn();
+                            $("#send").attr("comment_id","0");
+                            break;
+                        case 0:
+                            Toast(data.msg,1000);
+                            $("#input").val("");
+                            $("#commentInput")
+                                .fadeOut();
+                            $(".page-turn")
+                                .fadeIn();
+                            $("#send").attr("comment_id","0");
+                            switch(data.code){
+                                case 103:
+                                    //未登录
+                                    window.location.href="../login/?origin=post_content/;;;post_id;;"+$_GET["post_id"];
+                                    break;
+                            }
+                            break;
+                    }
+                });
+            }
         });
     });
     </script>
     <style>
+    .emotion{
+    width:100%;
+    flex-wrap: wrap;
+    height:200px;
+    overflow-y:scroll;
+    }
+    .emotion img {
+    width: calc((100% - 90px ) / 7);
+    border-radius:0;
+    }
+    .emotion .face {
+        width: calc((100% - 90px ) / 7);
+        padding-right:15px;
+        padding-top:10px;
+        aspect-ratio:1/1;
+        border-radius:0;
+        margin:0;
+    }
+    .emotion img:nth-of-type(7n+0){
+        padding-right:0;
+    }
     </style>
 </html>
