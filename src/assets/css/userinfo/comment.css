@@ -1,0 +1,109 @@
+.content {
+    overflow-y:scroll;
+    margin:10px 10px;
+    height:calc(100% - 70px);
+}
+img {
+    width:100%;
+    border-radius:10px;
+    object-fit:cover;
+    margin:5px 0
+}
+.writeface {
+    margin:0
+}
+.comment-img {
+    flex-wrap:wrap
+}
+.comment-img img {
+    width:calc((100% - 20px) / 3);
+    margin:5px 5px 0 0;
+    object-fit:cover;
+    aspect-ratio:1/1
+}
+.comment-img img:nth-of-type(3n+0) {
+    margin-right:10px
+}
+.comment-img img,.body img {
+    border-radius:5px;
+    cursor:pointer;
+    transition:0.3s
+}
+recommendtopics {
+    font-weight:bold
+}
+.comment-img img:hover,.body img:hover,recommendtopics:hover {
+    opacity:0.7
+}
+.tag .level {
+    padding:0 5px;
+    background:rgb(25,212,105);
+    border-radius:5px;
+    color:white
+}
+.tag .age {
+    padding:0 5px;
+    background:rgb(29,200,240);
+    border-radius:5px;
+    color:white
+}
+.tag .identityTitle {
+    padding:0 5px;
+    background:rgb(255,0,0);
+    border-radius:5px;
+    color:white
+}
+#text {
+    color:rgb(0,136,0)
+}
+.tag *,#tag * * {
+    font-size:12px
+}
+.author {
+    padding:10px 10px
+}
+.comment-icon {
+    width:50px;
+    height:50px;
+    margin:10px 0 10px 10px;
+    border-radius:40px
+}
+.item-list div .flex .flex1 {
+    margin-top:10px
+}
+.item-list div div .flex1 {
+    margin:10px 10px
+}
+.ref {
+    margin:10px 10px 10px 0;
+    background:#F0F0F0;
+    padding:5px 10px;
+    border-radius:10px
+}
+.ref div {
+    margin:10px 0;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden
+}
+.up .flex1 {
+    margin-top:10px
+}
+.down {
+    margin-left:70px
+}
+.down .text {
+    margin-right:10px
+}
+.info {
+    background:rgb(250,250,250);
+    border-radius:5px;
+    padding:10px 10px;
+    margin:10px 10px 0 0;
+    border:1px solid rgb(230,230,230)
+}
+.info div {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis
+}

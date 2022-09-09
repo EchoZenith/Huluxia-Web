@@ -98,8 +98,8 @@ $(function() {
     $(".bf")
         .click(function() {
         $(this)
-            .text("Loading···")
-        let str = '', title, detail, images, nick, posts, postID, weightAndTopPost;
+            .text("Loading···");
+        let str = '';
         $.getJSON("../../php/post/list/ANDROID/4.1.8.php", {
             cat_id: $_GET["cat_id"],
             start: $(this)
