@@ -1,0 +1,47 @@
+#rly_title,#rly_moderator,#rly_rules {
+    background:rgb(255,255,255);
+    border-radius:5px;
+    padding:10px 10px 10px 10px
+}
+img {
+    border-radius:5px
+}
+#title {
+    align-items:center
+}
+#description {
+    color:rgb(120,120,120);
+    font-size:12px;
+    margin-top:5px
+}
+#title {
+    font-weight:bold
+}
+#icon {
+    height:55px;
+    width:55px;
+    margin:-10px 10px 0 0
+}
+#rules {
+    margin-top:10px;
+    font-size:10px;
+    white-space:pre-line
+}
+#moderator {
+    font-size:10px;
+    flex-wrap:wrap
+}
+#moderator img {
+    width:calc((100% - 50px) / 6);
+    margin-top:10px;
+    margin-right:10px;
+    aspect-ratio:1/1
+}
+#moderator img:nth-of-type(6n+0) {
+    margin-right:0
+}
+.content {
+    overflow-y:scroll;
+    background:rgb(240,240,240);
+    display:none
+}

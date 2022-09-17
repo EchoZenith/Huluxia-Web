@@ -2,11 +2,11 @@ $(function() {
     /*
     This code by PeterCoast
     */
-    if ($_GET["cat_id"] == "" || $_GET["cat_id"] == null || $_GET["fum_id"] == "" || $_GET["fum_id"] == null) {
+    if ($_GET.cat_id == "" || $_GET.cat_id == null || $_GET.fum_id == "" || $_GET.fum_id == null) {
         window.location.href = "../category/";
     }
     $.getJSON("../../php/user/signin/check/ANDROID/2.0.php", {
-        cat_id: $_GET["cat_id"],
+        cat_id: $_GET.cat_id,
         user_id: $.cookie("Huluxia-Web-userID"),
         _key: $.cookie("Huluxia-Web-_key")
     }, function(data) {
@@ -24,25 +24,29 @@ $(function() {
                 .text("已签到");
         }
     });
+    $(".head")
+        .click(function() {
+        window.location.href = "../item_container/cat_info.html?origin=item_container/;;;fum_id;;" + $_GET.fum_id + ";cat_id;;" + $_GET.cat_id + "&cat_id="+$_GET.cat_id;
+    });
     $("#daren")
         .click(function() {
-        window.location.href = "../daren/?cat_id=" + $_GET["cat_id"];
+        window.location.href = "../daren/?cat_id=" + $_GET.cat_id;
     });
     $("#signin")
         .click(function() {
         if ($(this)
             .attr("signin") == "yes") {
-            Toast("已经签到过了",500);
+            Toast("已经签到过了", 500);
         } else if ($(this)
             .attr("signin") == "no") {
             _key = $.cookie("Huluxia-Web-_key");
             if (_key == null) {
                 //Toast("未登录",500);
-                window.location.href = "../login/?origin=item_container/;;;cat_id;;"+$_GET["cat_id"];
+                window.location.href = "../login/?origin=item_container/;;;cat_id;;" + $_GET.cat_id;
             } else {
                 $.getJSON("../../php/user/signin/ANDROID/4.0.php", {
                     _key: _key,
-                    cat_id: $_GET["cat_id"]
+                    cat_id: $_GET.cat_id
                 }, function(data) {
                     if (data.code == 103 || data.msg == "未登录") {
                         /*_key失效*/
@@ -53,20 +57,20 @@ $(function() {
                             path: '/'
                         });
                         //Toast("未登录",500);
-                        window.location.href = "../login/?origin=item_container/;;;cat_id;;"+$_GET["cat_id"];
+                        window.location.href = "../login/?origin=item_container/;;;cat_id;;" + $_GET.cat_id;
                     } else {
                         $("#signin")
                             .attr("signin", "yes");
                         $("#signinText")
                             .text("已签到");
-                        Toast("签到成功",500);
+                        Toast("签到成功", 500);
                     }
                 });
             }
         }
     });
     $.getJSON("../../php/post/list/ANDROID/4.1.8.php", {
-        cat_id: $_GET["cat_id"]
+        cat_id: $_GET.cat_id
     }, function(data) {
         let category = data.category, weightAndTopPost = data.weightAndTopPost, title, postID, notice;
         for (let i = 0; i < weightAndTopPost.length; i++) {
@@ -101,7 +105,7 @@ $(function() {
             .text("Loading···");
         let str = '';
         $.getJSON("../../php/post/list/ANDROID/4.1.8.php", {
-            cat_id: $_GET["cat_id"],
+            cat_id: $_GET.cat_id,
             start: $(this)
                 .attr("start")
         }, function(data) {
