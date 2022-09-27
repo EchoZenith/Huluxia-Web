@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
+<title>title</title>
+<script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="../../assets/css/index.css">
+<!-- <link rel="stylesheet" href="../../assets/css/main.css"> -->
+</head>
+<body>
+    <div class="main">
+        <div class="html">
+            <div class="game">开发中</div>
+            <div class="bbs">开发中</div>
+            <div class="space"><iframe class="iframe" scrolling="auto" frameborder="0" src="../空间/index.html"></iframe></div>
+        </div>
+        <div class="bottom"><hr>
+            <div class="flex">
+                <div class="flex flex-column" id="game"><img src="../../assets/img/ic_main_game.png">首页</div>
+                <div class="flex flex-column" id="bbs"><img src="../../assets/img/ic_main_bbs.png">社区</div>
+                <div class="flex flex-column" id="space"><img src="../../assets/img/ic_main_space.png">空间</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../assets/js/index.js"></script>
+<!-- <script src="../../assets/js/main.js"></script> -->
+<script>
+$(function(){
+    $('#game').click(function(){
+        $('#game img').attr("src","../../assets/img/ic_main_game_on.png");
+        $('#bbs img').attr("src","../../assets/img/ic_main_bbs.png");
+        $('#space img').attr("src","../../assets/img/ic_main_space.png");
+        
+        $('.game').show(0);
+        $('.bbs').hide(0);
+        $('.space').hide(0);
+    });
+    $('#bbs').click(function(){
+        $('#game img').attr("src","../../assets/img/ic_main_game.png");
+        $('#bbs img').attr("src","../../assets/img/ic_main_bbs_on.png");
+        $('#space img').attr("src","../../assets/img/ic_main_space.png");
+        
+        $('.game').hide(0);
+        $('.bbs').show(0);
+        $('.space').hide(0);
+    });
+    $('#space').click(function(){
+        $('#game img').attr("src","../../assets/img/ic_main_game.png");
+        $('#bbs img').attr("src","../../assets/img/ic_main_bbs.png");
+        $('#space img').attr("src","../../assets/img/ic_main_space_on.png");
+        
+        $('.game').hide(0);
+        $('.bbs').hide(0);
+        $('.space').show(0);
+    });
+    $('#game').click();
+    $(".iframe").attr("height",document.body.scrollHeight-60)
+});
+</script>
+<style>
+/*{border:1px solid #333}*/
+.main{
+    display: flex;
+    min-height:100%;
+    flex-flow: row wrap;
+    width: 100%;
+}
+.html{
+    width: 100%;
+    background: rgb(250,250,250);
+    overflow-y:scroll;
+    align-self: flex-start;
+    //height: calc(100% - 60px);
+    height:100%;
+}
+iframe{
+//height:calc(100% - 60px);
+width:100%;
+}
+.bottom{
+    width: 100%;
+    height: 60px;
+    background: rgb(250,250,250);
+    align-self: flex-end;
+}
+.bottom .flex div{
+    width:calc(100% / 3);
+    justify-content: center;
+    align-items: center;
+    height:60px;
+    font-size:10px;
+}
+.bottom .flex div img{
+    height:30px;
+}
+</style>
+</html>
