@@ -1,0 +1,1 @@
+<?php print_r(file_get_contents("http://floor.huluxia.com/category/list/ANDROID/2.0?_key=".$_GET['_key']));

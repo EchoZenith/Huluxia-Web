@@ -1,0 +1,140 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0">
+<title>title</title>
+<script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<link rel="stylesheet" href="../../assets/css/index.css">
+<!-- <link rel="stylesheet" href="../../assets/css/社区.css"> -->
+</head>
+<body>
+    <div style="background:rgb(240,240,240)">
+        <div class="flex" id="Top"><!-- Top -->
+            <div><img src="../../assets/img/ic_class_add.png" id="class_add"></div>
+            <div id="title" class="flex">葫芦侠社区</div>
+            <div><img src="../../assets/img/ic_message.png" id="message"></div>
+        </div>
+        <div id="imgBox">
+            <div id="imgBox_img"></div>
+            <div id="imgBox_title" class="flex"></div>
+        </div>
+        <div>
+            <!-- 板块 -->
+            <div class="bodyTitle">我的板块</div>
+            <div class="sectionList like flex">
+                <div>
+                    <div class="flex"><img src="../../assets/img/save/wodeguanzhu.png">我的关注</div>
+                </div>
+                <div>
+                    <div class="flex"><img src="../../assets/img/save/sanlouhuodong.png">三楼活动</div>
+                </div>
+            </div>
+            <div class="bodyTitle">系统推荐</div>
+            <div class="sectionList system flex">
+                <div>
+                    <div class="flex category isClickBackground" cat_id="1" fum_id="10"><img src="../../assets/img/save/3lougonggaoban.png">3楼公告板</div>
+                </div>
+                <div>
+                    <div class="flex category isClickBackground" cat_id="6" fum_id="12"><img src="../../assets/img/save/yijianfankui.png">意见反馈</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../assets/js/index.js"></script>
+<!-- <script src="../../assets/js/社区.js"></script> -->
+<script>
+$(function(){
+    $.getJSON('http://floor.huluxia.com/activity/recommend/ANDROID/2.1?jsoncallback=?',function(data){
+        title=data.detail.title;
+        img=data.detail.picture_url;
+        url=data.detail.jump_mode;
+        $('#imgBox_img').css('background-image','url('+img+')');
+        $('#imgBox_title').text(title);
+        $('#imgBox').click(function(){
+            window.open(url);
+        });
+    });
+    $('#class_add').click(function(){
+        window.location.href="../category/";
+    });
+    key = $.cookie("Huluxia-Web-_key");
+    $.getJSON('../../php/category/list/ANDROID/2.0.php',{
+        _key:key
+    },function(data){
+        let str = '';
+        data = data.categories;
+        for(let i=3; i < data.length-3; i++){
+            $('.like').append('<div><div class="flex category isClickBackground" fum_id="'+data[i].forumid+'" cat_id="'+data[i].categoryID+'"><img src="'+data[i].icon+'">'+data[i].title+'</div></div>');
+        }
+        $('.category').click(function(){
+            window.location.href='../item_container/?cat_id='+$(this).attr("cat_id")+'&fum_id='+$(this).attr("fum_id");
+        });
+    });
+});
+</script>
+<style>
+/*{border:1px solid #333}*/
+#Top{
+    background:rgb(0,207,81);
+}
+#title{
+    width:100%;
+    align-items:center;
+    justify-content:center;
+    color:rgb(255,255,255);
+    font-weight:bold;
+}
+#class_add,#message{
+    margin:10px 10px;
+    width:25px;
+    height:25px;
+}
+#imgBox{
+    height:150px;
+}
+#imgBox_img{
+    height:150px;
+    background-size: cover;
+}
+#imgBox_title{
+    align-items:center;
+    font-weight:bold;
+    height:20px;
+    margin-top:-28px;
+    padding:4px 10px 4px 10px;
+    background:rgba(0,0,0,0.1);
+    color:rgb(255,255,255);
+    font-size:10px;
+}
+img{
+    border-radius:0;
+}
+.bodyTitle{
+    color:rgb(0,0,0);
+    padding:10px 10px;
+    font-size:12px;
+    font-weight:bold;
+}
+.sectionList{
+    background:rgb(255,255,255);
+    flex-wrap:wrap;
+}
+.sectionList div{
+    width:calc(50% - 1px);
+    height:70px;
+}
+.sectionList div .flex{
+    height:70px;
+    width:100%;
+    border:0.5px solid rgb(240,240,240);
+    align-items:center;
+}
+.sectionList div .flex img{
+    margin:10px 10px;
+    height:50px;
+    width:50px;
+}
+</style>
+</html>
