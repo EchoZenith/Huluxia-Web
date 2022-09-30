@@ -3,7 +3,7 @@ $(function() {
     This code by PeterCoast
     */
     if ($_GET["cat_id"] == "" || $_GET["cat_id"] == null) {
-        window.location.href = "../category/";
+        lgourl();
     }
     $.getJSON("http://floor.huluxia.com/sgin/list/ANDROID/2.2?jsoncallback=?", {
         cat_id: $_GET["cat_id"],
@@ -39,16 +39,14 @@ $(function() {
             }
             $(".item")
                 .click(function() {
-                window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&origin=daren/;;;cat_id;;"+$_GET["cat_id"];
+                location.href = "../userinfo/?user_id=" + $(this)
+                    .attr("user_id") + "#" + location.href;
             });
         }
         $(".item-list")
             .slideDown("slow");
         $(".signin .flex .flex .bf")
             .attr("start", "20");
-        $(".htmlLoading")
-            .slideUp("slow");
     });
 });
 $(".signin .flex .flex .bf")
@@ -90,8 +88,8 @@ $(".signin .flex .flex .bf")
             }
             $(".item")
                 .click(function() {
-                window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&origin=daren/;;;cat_id;;"+$_GET["cat_id"];
+                location.href = "../userinfo/?user_id=" + $(this)
+                    .attr("user_id") + "#" + location.href;
             });
         }
         $(".signin .flex .flex .bf")

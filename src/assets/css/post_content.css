@@ -9,7 +9,8 @@ img {
 }
 .content {
     overflow-x:hidden;
-    overflow-y:scroll
+    overflow-y:scroll;
+    height: calc(100% - 45px);
 }
 .comment-img {
     flex-wrap:wrap

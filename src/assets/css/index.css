@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300&display=swap');
-    .flex {
+.flex {
     display:flex
 }
 .flex1 {
@@ -123,4 +123,27 @@ a:active {
     box-sizing:border-box;
     padding:5px;
     background-color:#FFFFFF
+}
+.backNav {
+    display:flex;
+    height:44px;
+    background:rgb(0,207,81);
+    align-items:center;
+}
+.backNav .backBtn{
+    height:44px;
+    width:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.backNav .backBtn div{
+    height:30px;
+    width:30px;
+    background:url(../../assets/img/ic_nav_back.png);
+    background-size:cover;
+}
+.backNav .backTitle {
+    color:rgb(255,255,255);
+    font-weight:bold;
 }

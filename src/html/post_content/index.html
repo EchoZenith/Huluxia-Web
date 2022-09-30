@@ -11,7 +11,12 @@
         <!-- <style>*{border:1px solid #333}</style> -->
     </head>
     <body class="post_content">
-        <div class="htmlLoading">Loading···</div>
+        <div class="backNav">
+            <div class="backBtn" onclick="lgourl()">
+                <div></div>
+            </div>
+            <div class="backTitle"></div>
+        </div>
         <div style="display:none;" class="flex flex-column content">
             <div style="overflow-x:hidden" class="flex1">
                 <div class="video-player">
@@ -126,7 +131,7 @@
                             switch(data.code){
                                 case 103:
                                     //未登录
-                                    window.location.href="../login/?origin=post_content/;;;post_id;;"+$_GET["post_id"];
+                                    window.location.href="../login/index.html#"+location.href;
                                     break;
                             }
                             break;

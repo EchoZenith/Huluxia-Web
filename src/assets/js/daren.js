@@ -1,11 +1,8 @@
 $(function() {
     $(".master")
-        .load("../daren_master/", function() {
-        $(".htmlLoading")
-            .slideUp("slow", function() {
-            $(".signin")
-                .load("../daren_signin/");
-        });
+        .load("../daren_master/index.html", function() {
+        $(".signin")
+            .load("../daren_signin/index.html");
     });
 });
 $("#master")

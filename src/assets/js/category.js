@@ -11,13 +11,12 @@ $(function() {
         }
         $(".cate-container")
             .html(str);
-        $(".htmlLoading")
-            .slideUp("slow");
         $(".content")
             .fadeToggle("slow");
         $(".getItem")
             .click(function() {
-            let fum_id = $(this).attr("fum_id");
+            let fum_id = $(this)
+                .attr("fum_id");
             $.getJSON("http://floor.huluxia.com/category/forum/list/all/ANDROID/2.0?jsoncallback=?", {
                 fum_id: fum_id
             }, function(data) {
@@ -38,9 +37,9 @@ $(function() {
                     .show(500);
                 $(".toFum")
                     .click(function() {
-                    window.location.href = "../item_container/?fum_id=" + $(this)
+                    location.href = "../item_container/?fum_id=" + $(this)
                         .attr("fum_id") + "&cat_id=" + $(this)
-                        .attr("cat_id");
+                        .attr("cat_id") + "#" + location.href;
                 });
             });
         });

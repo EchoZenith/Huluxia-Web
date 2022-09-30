@@ -1,12 +1,12 @@
-.cgourd{
+/*.cgourd{
     margin:10px 10px;
-}
+}*/
 hr{
     margin:10px 0;
 }
 #c,#gourd {
     overflow-y:scroll;
-    height:calc(100% - 70px);
+    height:calc(100% - 125px);
 }
 #nick div,#age div,#rightInfo {
     font-size:12px;

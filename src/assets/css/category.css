@@ -1,8 +1,11 @@
+.content{
+    height: calc(100% - 44px);
+}
 .cate-container {
     width:100px;
     background:#F0F0F0;
     height:100%;
-    overflow:sceoll
+    overflow:scroll
 }
 .cate-container div {
     border-bottom-style:solid;

@@ -3,7 +3,6 @@ $(function() {
     $.getJSON('http://floor.huluxia.com/category/detail/ANDROID/2.0?jsoncallback=?', {
         cat_id: cat_id
     }, function(data) {
-        console.log(data);
         title = data.title;
         icon = data.icon;
         rule = data.rule;
@@ -17,8 +16,8 @@ $(function() {
             .attr('src', icon);
         $("#rules")
             .text(rule);
-        $(".htmlLoading")
-            .slideUp("slow");
+        $(".backTitle")
+            .text(title);
         $(".content")
             .fadeToggle("slow");
         for (let i = 0; i < moderator.length; i++) {
@@ -29,8 +28,8 @@ $(function() {
         }
         $("#moderator img")
             .click(function() {
-            window.location.href = "../userinfo/?origin=item_container/fum_info.html;;;cat_id;;" + cat_id + "&user_id=" + $(this)
-                .attr("user_id");
+            location.href = "../userinfo/?user_id=" + $(this)
+                .attr("user_id") + "#" + location.href;
         });
     });
 });

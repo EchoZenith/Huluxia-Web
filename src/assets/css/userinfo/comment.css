@@ -1,7 +1,7 @@
 .content {
     overflow-y:scroll;
     margin:10px 10px;
-    height:calc(100% - 70px);
+    height:calc(100% - 64px);
 }
 img {
     width:100%;

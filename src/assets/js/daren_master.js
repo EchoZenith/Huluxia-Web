@@ -3,7 +3,7 @@ $(function() {
     This code by PeterCoast
     */
     if ($_GET["cat_id"] == "" || $_GET["cat_id"] == null) {
-        window.location.href = "../category/";
+        lgourl();
     }
     $.getJSON("http://floor.huluxia.com/big/shot/list/ANDROID/4.1?jsoncallback=?", {
         cat_id: $_GET["cat_id"],
@@ -35,7 +35,7 @@ $(function() {
                     .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
             } else {
                 $(".master .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:'+rgba2hex(identityColor)+'" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:' + rgba2hex(identityColor) + '" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
             }
         }
         $(".item-list")
@@ -44,8 +44,8 @@ $(function() {
             .attr("start", "20");
         $(".item")
             .click(function() {
-            window.location.href = "../userinfo/?user_id=" + $(this)
-                .attr("user_id") + "&origin=daren/;;;cat_id;;"+$_GET["cat_id"];
+            location.href = "../userinfo/?user_id=" + $(this)
+                .attr("user_id") + "#" + location.href;
         });
 
     });
@@ -85,7 +85,7 @@ $(".master .flex .flex .bf")
                     .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
             } else {
                 $(".master .flex .flex .bf")
-                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:'+rgba2hex(identityColor)+'" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
+                    .before('<div user_id="' + user_id + '" class="flex isClickBackground item"><div style="text-align:center;width:30px" class="seq">' + seq + '</div><div class="img"><img src="' + avatar + '"></div><div class="flex flex1 info flex-column"><div id="nick">' + nick + '</div><div style><span style="background:' + ageColor + ';" class="ageTag">' + age + '</span>&nbsp;<span style="background:' + rgba2hex(identityColor) + '" class="identityTitleTag">' + identityTitle + '</span></div></div><div class="weektotal"><span>' + weektotal + '</span>分</div></div><hr>');
             }
         }
         $(".master .flex .flex .bf")
@@ -93,8 +93,8 @@ $(".master .flex .flex .bf")
             .attr("start")) + 20);
         $(".item")
             .click(function() {
-            window.location.href = "../userinfo/?user_id=" + $(this)
-                .attr("user_id") + "&origin=daren/;;;cat_id;;"+$_GET["cat_id"];
+            location.href = "../userinfo/?user_id=" + $(this)
+                .attr("user_id") + "#" + location.href;
         });
         $(".master .flex .flex .bf")
             .text("加载更多");

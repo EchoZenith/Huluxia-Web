@@ -1,33 +1,37 @@
 $(function() {
     if ($_GET["user_id"] == null || $_GET["user_id"] == "") {
-        if ($_GET["origin"] != null && $_GET["origin"] != "") {
-            window.location.href = "../" + getOrigin();
-        } else {
-            window.location.href = "../category/";
-        }
+        lgourl();
     } else {
         switch ($_GET["type"]) {
-                case "favorite":
-                    url = "http://floor.huluxia.com/post/favorite/list/ANDROID/4.1.8?jsoncallback=?";
-                    break;
-                default:
-                    url = "http://floor.huluxia.com/post/create/list/ANDROID/4.1.8?jsoncallback=?";
-                    break;
-            }
+            case "favorite":
+                url = "http://floor.huluxia.com/post/favorite/list/ANDROID/4.1.8?jsoncallback=?";
+                titleType = "收藏";
+                break;
+            default:
+                url = "http://floor.huluxia.com/post/create/list/ANDROID/4.1.8?jsoncallback=?";
+                titleType = "帖子";
+                break;
+        }
         $(".bf")
             .click(function() {
             $(this)
                 .text("Loading···")
-            let str = '', title, detail, images, nick, posts, postID, weightAndTopPost;
+            let str = '';
             $.getJSON(url, {
                 user_id: $_GET["user_id"],
                 start: $(this)
                     .attr("start")
             }, function(data) {
-                console.log(data);
                 start = data.start;
+                if ($_GET["user_id"] == $.cookie("Huluxia-Web-userID")) {
+                    $(".backTitle")
+                        .text("我的" + titleType);
+                } else {
+                    $(".backTitle")
+                        .text("Ta的" + titleType);
+                }
                 for (let i = 0; i < data.posts.length; i++) {
-                    if(data.posts[i].state==2) continue;
+                    if (data.posts[i].state == 2) continue;
                     posts = data.posts[i];
                     title = posts.title;
                     images = posts.images[0];
@@ -52,13 +56,11 @@ $(function() {
                 }
                 $(".post-list-item")
                     .click(function() {
-                    window.location.href = "../post_content/?post_id=" + $(this)
-                        .attr("post_id");
+                    location.href = "../post_content/?post_id=" + $(this)
+                        .attr("post_id") + "#" + location.href;
                 });
             });
         });
-        $(".htmlLoading")
-            .slideUp("slow");
         $(".content")
             .fadeToggle("slow");
         $(".bf")

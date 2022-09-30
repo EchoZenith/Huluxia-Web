@@ -5,11 +5,7 @@ $(function() {
     let _key = $.cookie('Huluxia-Web-_key'), userID = $.cookie('Huluxia-Web-userID');
     if (_key != null && userID != null) {
         if ($_GET["user_id"] == null || $_GET["user_id"] == "") {
-            if ($_GET["origin"] != null) {
-                window.location.href = "../" + getOrigin();
-            } else {
-                window.location.href = "../category/";
-            }
+            lgourl();
         } else {
             $.getJSON('http://floor.huluxia.com/user/info/ANDROID/4.1.8?jsoncallback=?', {
                 _key: _key,
@@ -18,7 +14,7 @@ $(function() {
                 if (data.code == 103) {
                     //key已失效
                     alert("未登录");
-                    window.location.href = "../login/?" + getAllPar;
+                    location.href = "../login/index.html#" + location.href;
                 } else if (data.code == null) {
                     if ($.cookie("Huluxia-Web-userID") == $_GET["user_id"]) {
                         $(".who")
@@ -205,30 +201,28 @@ $(function() {
                     }
                     
                     $("#post").click(function(){
-                        window.location.href = "../user_post_list/?user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                        location.href = "../user_post_list/index.html?user_id="+$_GET["user_id"]+"#"+location.href;
                     });//帖子按钮点击
                     $("#following").click(function(){
-                        window.location.href = "../user_follow/?type=1&user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                        location.href = "../user_follow/index.html?type=1&user_id="+$_GET["user_id"]+"#"+location.href;
                     });//关注按钮点击
                     $("#follower").click(function(){
-                        window.location.href = "../user_follow/?type=2&user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                        location.href = "../user_follow/index.html?type=2&user_id="+$_GET["user_id"]+"#"+location.href;
                     });//粉丝按钮点击
                     $("#comment").click(function(){
-                        window.location.href = "../user_comment/?user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                        location.href = "../user_comment/index.html?user_id="+$_GET["user_id"]+"#"+location.href;
                     });//回复按钮点击
                     $("#favorite").click(function(){
-                        window.location.href = "../user_post_list/?type=favorite&user_id="+$_GET["user_id"]+"&origin=userInfo/;;;user_id;;"+$_GET["user_id"];
+                        location.href = "../user_post_list/index.html?type=favorite&user_id="+$_GET["user_id"]+"#"+location.href;
                     });//收藏按钮点击
                     
-                    $(".htmlLoading")
-                        .slideUp("slow");
                     $(".content")
                         .show("slow");
                     $("#integral").click(function(){
-                        window.location.href="../cgourd/?user_id="+$_GET["user_id"]+"&origin=userinfo/;;;user_id;;"+$_GET["user_id"]+"&type=c&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&integral="+integral;
+                        location.href="../cgourd/index.html?user_id="+$_GET["user_id"]+"&type=c&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&integral="+integral+"#"+location.href;
                     });
                     $("#credits").click(function(){
-                        window.location.href="../cgourd/?origin=userinfo/;;;user_id;;"+$_GET["user_id"]+"&type=g&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&credits="+credits;
+                        location.href="../cgourd/index.html?type=g&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&credits="+credits+"#"+location.href;
                     });
                     if ($.cookie("Huluxia-Web-userID") != $_GET["user_id"]) {
                         $(".ftools")
@@ -314,16 +308,12 @@ $(function() {
                     }
                 } else if (data.code == 104) {
                     alert("用户不存在");
-                    if ($_GET["origin"] != null || $_GET["origin"] != "") {
-                        window.location.href = "../" + getOrigin();
-                    } else {
-                        window.location.href = "../category/";
-                    }
+                    lgourl();
                 }
             });
         }
     } else {
         alert("未登录");
-        window.location.href = "../login/?" + getAllPar;
+        location.href = "../login/index.html#" + location.href;
     }
 });

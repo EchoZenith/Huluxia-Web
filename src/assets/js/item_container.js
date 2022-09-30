@@ -3,7 +3,7 @@ $(function() {
     This code by PeterCoast
     */
     if ($_GET.cat_id == "" || $_GET.cat_id == null || $_GET.fum_id == "" || $_GET.fum_id == null) {
-        window.location.href = "../category/";
+        lgourl();
     }
     $.getJSON("../../php/user/signin/check/ANDROID/2.0.php", {
         cat_id: $_GET.cat_id,
@@ -26,11 +26,11 @@ $(function() {
     });
     $(".head")
         .click(function() {
-        window.location.href = "../item_container/cat_info.html?origin=item_container/;;;fum_id;;" + $_GET.fum_id + ";cat_id;;" + $_GET.cat_id + "&cat_id="+$_GET.cat_id;
+        location.href = "../item_container/cat_info.html?cat_id=" + $_GET.cat_id + "#" + location.href;
     });
     $("#daren")
         .click(function() {
-        window.location.href = "../daren/?cat_id=" + $_GET.cat_id;
+        location.href = "../daren/index.html?cat_id=" + $_GET.cat_id + "#" + location.href;
     });
     $("#signin")
         .click(function() {
@@ -42,7 +42,7 @@ $(function() {
             _key = $.cookie("Huluxia-Web-_key");
             if (_key == null) {
                 //Toast("未登录",500);
-                window.location.href = "../login/?origin=item_container/;;;cat_id;;" + $_GET.cat_id;
+                location.href = "../login/index.html#" + location.href;
             } else {
                 $.getJSON("../../php/user/signin/ANDROID/4.0.php", {
                     _key: _key,
@@ -57,7 +57,7 @@ $(function() {
                             path: '/'
                         });
                         //Toast("未登录",500);
-                        window.location.href = "../login/?origin=item_container/;;;cat_id;;" + $_GET.cat_id;
+                        location.href = "../login/index.html#" + location.href;
                     } else {
                         $("#signin")
                             .attr("signin", "yes");
@@ -87,8 +87,8 @@ $(function() {
         }
         $(".weightAndTop")
             .click(function() {
-            window.location.href = '../post_content/?post_id=' + $(this)
-                .attr("post_id");
+            location.href = '../post_content/index.html?post_id=' + $(this)
+                .attr("post_id") + "#" + location.href;
         });
         $("#icon")
             .attr("src", category.icon);
@@ -97,6 +97,8 @@ $(function() {
         $("#post")
             .text(category.postCountFormated);
         $("#title")
+            .text(category.title);
+        $(".backTitle")
             .text(category.title);
     });
     $(".bf")
@@ -130,13 +132,11 @@ $(function() {
                 .attr("start", start);
             $(".post-list-item")
                 .click(function() {
-                window.location.href = "../post_content/?post_id=" + $(this)
-                    .attr("post_id");
+                location.href = "../post_content/index.html?post_id=" + $(this)
+                    .attr("post_id") + "#" + location.href;
             });
         });
     });
-    $(".htmlLoading")
-        .slideUp("slow");
     $(".content")
         .fadeToggle("slow");
     $(".bf")

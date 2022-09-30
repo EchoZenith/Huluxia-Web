@@ -6,12 +6,13 @@ img {
 }
 .content {
     overflow:scroll;
+    height: calc(100% - 44px);
 }
 #userInfo {
     background:rgba(120,120,120,0.4);
     color:rgb(200,200,200);
 }
- #up {
+#up {
     padding:10px 0;
 }
 #down .flex span {
@@ -28,12 +29,12 @@ img {
     background:rgba(47,47,47,0.5)
 }
 #null {
-    height:260px
+    height:250px
 }
 #up {
     margin:0 10px 10px 10px
 }
- #usericon {
+#usericon {
     width:60px;
     height:60px;
     margin-right:10px;

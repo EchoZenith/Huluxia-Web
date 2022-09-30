@@ -2,7 +2,7 @@ $(function(){
     /*
     This code by PeterCoast
     */
-    if(getOrigin()!=null&&getOrigin()!="") Toast("未登录",500);
+    if(location.search!=null&&location.search!="") Toast("未登录",500);
     $("#loginBut").click(function(){
         let account = $("#account").val(),password=$("#password").val();
         if(account.length!=11||password.length==0){
@@ -20,7 +20,7 @@ $(function(){
                     let _key=data._key, userID=data.user.userID,nick=data.user.nick,avatar=data.user.avatar;
                     $.cookie("Huluxia-Web-_key",_key,{ expires: 30,path:'/' });
                     $.cookie("Huluxia-Web-userID",userID,{ expires: 30,path:'/' });
-                    window.location.href="../"+getOrigin();
+                    lgourl();
                 } else if(data.code==102) {
                     /*参数不合法*/
                     Toast(data.msg+"\n请检查账号或密码是否正确",1000);

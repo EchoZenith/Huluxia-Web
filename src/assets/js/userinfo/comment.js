@@ -2,11 +2,7 @@ $(function() {
     user_id = $_GET.user_id;
     key = $.cookie('Huluxia-Web-_key');
     if (user_id == "" || user_id == null) {
-        if ($_GET["origin"] != null && $_GET["origin"] != "") {
-            window.location.href = "../" + getOrigin();
-        } else {
-            window.location.href = "../category/";
-        }
+        lgourl();
     } else {
         $('.bf')
             .click(function() {
@@ -19,7 +15,6 @@ $(function() {
                 count: 20,
                 _key: key
             }, function(data) {
-                console.log(data);
                 let str = '', comments = data.comments, start = data.start;
                 for (let i = 0; i < comments.length; i++) {
                     text = comments[i].text;
@@ -102,11 +97,11 @@ $(function() {
                     }
                 }
                 if (user_id == $.cookie('Huluxia-Web-userID')) {
-                    $('body div span')
-                        .text("我");
+                    $('.backTitle')
+                        .text("我的回复");
                 } else {
-                    $('body div span')
-                        .text("Ta");
+                    $('.backTitle')
+                        .text("Ta的回复");
                 }
                 $(".htmlLoading")
                     .slideUp("slow");
@@ -128,8 +123,8 @@ $(function() {
                 });
                 $('.comment')
                     .click(function() {
-                    window.location.href = "../post_content/?origin=user_comment/;;;user_id;;"+ user_id +"&post_id=" + $(this)
-                        .attr("post_id");
+                    location.href = "../post_content/?post_id=" + $(this)
+                        .attr("post_id") + "#" + location.href;
                 });
                 $(".bf")
                     .text("加载更多");

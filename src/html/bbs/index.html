@@ -57,7 +57,7 @@ $(function(){
         });
     });
     $('#class_add').click(function(){
-        window.location.href="../category/";
+        window.location.href="../category/index.html#"+window.location.href;
     });
     key = $.cookie("Huluxia-Web-_key");
     $.getJSON('../../php/category/list/ANDROID/2.0.php',{
@@ -69,7 +69,7 @@ $(function(){
             $('.like').append('<div><div class="flex category isClickBackground" fum_id="'+data[i].forumid+'" cat_id="'+data[i].categoryID+'"><img src="'+data[i].icon+'">'+data[i].title+'</div></div>');
         }
         $('.category').click(function(){
-            window.location.href='../item_container/?cat_id='+$(this).attr("cat_id")+'&fum_id='+$(this).attr("fum_id");
+            window.location.href='../item_container/?cat_id='+$(this).attr("cat_id")+'&fum_id='+$(this).attr("fum_id")+"#"+window.location.href;
         });
     });
 });

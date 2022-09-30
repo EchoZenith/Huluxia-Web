@@ -43,5 +43,6 @@ img {
 .content {
     overflow-y:scroll;
     background:rgb(240,240,240);
-    display:none
+    display:none;
+    height: calc(100% - 44px);
 }

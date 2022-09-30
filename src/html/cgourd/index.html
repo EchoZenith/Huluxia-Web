@@ -8,16 +8,22 @@
 <link rel="stylesheet" href="../../assets/css/cgourd.css">
 </head>
 <body class="cgourd">
-    <div style="height:60px" class="flex">
-        <div><img id="avatar" style="height:50px;margin:0 10px 10px 0;border-radius:25px" src=""></div>
-        <div class="flex1">
+    <div class="backNav">
+        <div class="backBtn" onclick="lgourl()">
+            <div></div>
+        </div>
+        <div class="backTitle"></div>
+    </div>
+    <div style="height:70px" class="flex">
+        <div><img id="avatar" style="height:50px;margin:10px 10px 10px 10px;border-radius:25px" src=""></div>
+        <div class="flex1" style="margin-top:10px;">
             <div class="flex" id="nick"><div>nick</div></div>
             <div class="flex" id="age"><div class="ageTag">age</div></div>
         </div>
-        <div class="flex"><span id="rightInfo" style="align-self:center;color:rgb(249,183,0)"></span></div>
+        <div class="flex" style="margin-right:10px;"><span id="rightInfo" style="align-self:center;color:rgb(249,183,0)"></span></div>
     </div>
     <hr style="margin:0 0 10px 0;">
-    <div style="display:none" class="flex1" id="c">
+    <div style="display:none;margin:0 10px 0 10px;" class="flex1" id="c">
         <b>贡献值是什么？</b>
         <div>"贡献值“是葫芦侠社区用户鼓励大家参与社区秩序和环境维护的积分。</div>
         <hr>
@@ -52,7 +58,7 @@
             <tr><td>L14（1200000）</td><td>独孤求败</td></tr>
         </table>
     </div>
-    <div style="display:none;" id="gourd">
+    <div style="display:none;margin:0 10px 0 10px;" id="gourd">
         <b>葫芦是什么？</b>
         <div>“葫芦”是葫芦侠社区用于鼓励分享、鼓励优质内容的积分。</div>
         <hr>

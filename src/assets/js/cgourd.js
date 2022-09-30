@@ -20,16 +20,14 @@ $(function() {
             .show();
         $("#rightInfo")
             .text($_GET["integral"] + "贡献值");
+        $(".backTitle").text("贡献值");
     } else if ($_GET["type"] == "g") {
         $("#gourd")
             .show();
         $("#rightInfo")
             .text($_GET["credits"] + "葫芦数");
+        $(".backTitle").text("葫芦数");
     } else {
-        if ($_GET["origin"] != null || $_GET["origin"] != "") {
-            window.location.href = "../" + $_GET["origin"] + "/?origin=cgourd";
-        } else {
-            window.location.href = "../category/?origin=cgourd";
-        }
+        lgourl();
     }
 });

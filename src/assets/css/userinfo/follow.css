@@ -14,5 +14,5 @@
 }
 .content {
     overflow-y:scroll;
-    height:calc(100% - 50px);
+    height:calc(100% - 44px);
 }

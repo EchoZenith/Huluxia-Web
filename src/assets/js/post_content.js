@@ -3,18 +3,20 @@ $(function() {
     This code by PeterCoast
     */
     if ($_GET["post_id"] == "" || $_GET["post_id"] == null) {
-        window.location.href = "../category/";
+        lgourl();
     }
     $.getJSON("../../php/post/detail/ANDROID/4.1.8.php", {
         post_id: $_GET["post_id"]
     }, function(data) {
+        console.log(data);
         post = data.post;
+        category = post.category;
         comments = data.comments;
         window.totalPage = data.totalPage;
         window.currPageNo = data.currPageNo;
         voice = post.voice;
         user = post.user;
-        state = post.state;//帖子状态1正常,2删除,3锁定
+        state = post.state; //帖子状态1正常,2删除,3锁定
         auser_id = user.userID
         anick = user.nick;
         aavatar = user.avatar;
@@ -35,6 +37,8 @@ $(function() {
         scorelist = post.scorelist; //葫芦相关（以后实现）
         detail = detail.replace(/<image>/g, "<img src=")
             .replace(/<\/image>/g, ">");
+        $(".backTitle")
+            .text(category.title);
         $(".middle")
             .text(currPageNo + "/" + totalPage);
         $(".author")
@@ -66,8 +70,8 @@ $(function() {
         }
         $(".author")
             .click(function() {
-            window.location.href = "../userinfo/?user_id=" + $(this)
-                .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
+            location.href = "../userinfo/?user_id=" + $(this)
+                .attr("user_id") + "#" + location.href;
         });
         $(".body")
             .html(detail);
@@ -75,7 +79,7 @@ $(function() {
             .html('<div>' + title + '</div><div style="font-size:10px;">' + updateTime + '</div><div><span style="font-size:10px;">阅读：</span><span style="font-size:10px;">' + hit + '</span><span style="font-size:10px;"> 评论：</span><span style="font-size:10px;">' + commentCount + '</span></div>');
         $(".commentCount")
             .text(commentCount);
-        if(state==1){
+        if (state == 1) {
             if (postType == 4 || postType == 1) {
                 /*图文混编*/
                 /*处理帖子中的链接,表情,图片*/
@@ -87,7 +91,7 @@ $(function() {
                         .replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
                         .replace(/\[/g, "<face>[<writeface>")
                         .replace(/\]/g, "</writeface>]</face>"));
-    
+
                 });
                 $(".body img")
                     .each(function() {
@@ -124,7 +128,7 @@ $(function() {
                         .replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi, '<a href="$1">$1</a>')
                         .replace(/\[/g, "<face>[<writeface>")
                         .replace(/\]/g, "</writeface>]</face>"));
-    
+
                 });
                 if (recommendTopics != null) {
                     for (let i = 0; i < recommendTopics.length; i++) {
@@ -155,18 +159,20 @@ $(function() {
                 $(".video-player video")
                     .attr("poster", voice["imghost"] + voice["imgfid"]);
             }
-        } else if(state==2) {
-            $("#comment").text("已删除");
-        } else if(state==3) {
-            $("#comment").text("已锁定");
+        } else if (state == 2) {
+            $("#comment")
+                .text("已删除");
+        } else if (state == 3) {
+            $("#comment")
+                .text("已锁定");
         }
         $(".content")
-                .fadeToggle("slow");
-            $("recommendtopics")
-                .click(function() {
-                window.location.href = "../post_content/?post_id=" + $(this)
-                    .attr("post_id");
-            });
+            .fadeToggle("slow");
+        $("recommendtopics")
+            .click(function() {
+            location.href = "../post_content/?post_id=" + $(this)
+                .attr("post_id") + "#" + location.href;
+        });
         /*加载评论*/
         let str = '', text, seq, createTime, nick, avatar;
         $(".footer")
@@ -251,11 +257,9 @@ $(function() {
         }
         $(".comment-icon")
             .click(function() {
-            window.location.href = "../userinfo/?user_id=" + $(this)
-                .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
+            location.href = "../userinfo/?user_id=" + $(this)
+                .attr("user_id") + "#" + location.href;
         });
-        $(".htmlLoading")
-            .slideUp("slow");
         /*处理表情*/
         $.getJSON("../../assets/json/face.json", function(data) {
             window.face = data;
@@ -277,17 +281,22 @@ $(function() {
             }
             $(".emotion")
                 .html(str);
-        $(".face").click(function(){
-        var r,re;
-            var s = $("#input").val();
-            re = /\[?\]/ig;
-            r = s.match(re);
-            if(r==null||r.length<14){
-                $("#input").val($("#input").val()+"["+$(this).attr("name")+"]");
-            } else {
-                Toast("一次最多发送15个表情噢~",1000);
-            }
-        });
+            $(".face")
+                .click(function() {
+                var r, re;
+                var s = $("#input")
+                    .val();
+                re = /\[?\]/ig;
+                r = s.match(re);
+                if (r == null || r.length < 14) {
+                    $("#input")
+                        .val($("#input")
+                        .val() + "[" + $(this)
+                        .attr("name") + "]");
+                } else {
+                    Toast("一次最多发送15个表情噢~", 1000);
+                }
+            });
         });
         $(".comment-img img,.body img")
             .click(function() {
@@ -299,13 +308,13 @@ $(function() {
         });
         $("#comment")
             .click(function() {
-            if(state==1) {
-            $(".page-turn")
-                .fadeOut();
-            $("#commentInput")
-                .fadeIn();
-            $("#input")
-                .focus();
+            if (state == 1) {
+                $(".page-turn")
+                    .fadeOut();
+                $("#commentInput")
+                    .fadeIn();
+                $("#input")
+                    .focus();
             }
         });
         $(document)
@@ -417,7 +426,7 @@ $("#like")
                 switch (data.code) {
                     case 103:
                         /*未登录*/
-                        window.location.href = "../login/?origin=post_content/;;;post_id;;" + $_GET["post_id"];
+                        location.href = "../login/index.html#" + location.href;
                         break;
                     default:
                         Toast(data.msg, 500);
@@ -467,7 +476,7 @@ $("#favorite")
                 switch (data.code) {
                     case 103:
                         /*未登录*/
-                        window.location.href = "../login/?origin=post_content/;;;post_id;;" + $_GET["post_id"];
+                        location.href = "../login/index.html#" + location.href;
                         break;
                     default:
                         Toast(data.msg, 500);
@@ -599,8 +608,8 @@ $(".left")
             }
             $(".comment-icon")
                 .click(function() {
-                window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
+                location.href = "../userinfo/?user_id=" + $(this)
+                    .attr("user_id") + "#" + location.href;
             });
             $(".comment-img img,.body img")
                 .click(function() {
@@ -753,8 +762,8 @@ $(".right")
             }
             $(".comment-icon")
                 .click(function() {
-                window.location.href = "../userinfo/?user_id=" + $(this)
-                    .attr("user_id") + "&origin=post_content/;;;post_id;;" + $_GET["post_id"];
+                location.href = "../userinfo/?user_id=" + $(this)
+                    .attr("user_id") + "#" + location.href;
             });
             $(".comment-img img,.body img")
                 .click(function() {

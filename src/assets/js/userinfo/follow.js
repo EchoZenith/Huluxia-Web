@@ -1,10 +1,6 @@
 $(function() {
     if ($_GET["user_id"] == null || $_GET["user_id"] == "") {
-        if ($_GET["origin"] != null && $_GET["origin"] != "") {
-            window.location.href = "../" + getOrigin();
-        } else {
-            window.location.href = "../category/";
-        }
+        lgourl();
     } else {
         $(".bf")
             .click(function() {
@@ -12,7 +8,8 @@ $(function() {
                 .text("Loading···")
             switch ($_GET["type"]) {
                 case "2":
-                $("body .flex span").text("粉丝");
+                    $(".backTitle")
+                        .text("粉丝列表");
                     $.getJSON("http://floor.huluxia.com/friendship/follower/list/ANDROID/4.1.8?jsoncallback=?", {
                         user_id: $_GET["user_id"],
                         start: $(this)
@@ -54,13 +51,14 @@ $(function() {
                         }
                         $(".item")
                             .click(function() {
-                            window.location.href = "../userInfo/?user_id=" + $(this)
-                                .attr("user_id");
+                            location.href = "../userInfo/?user_id=" + $(this)
+                                .attr("user_id") + "#" + location.href;
                         });
                     });
                     break;
                 default:
-                $("body .flex span").text("关注");
+                    $(".backTitle")
+                        .text("关注列表");
                     $.getJSON("http://floor.huluxia.com/friendship/following/list/ANDROID/4.1.8?jsoncallback=?", {
                         user_id: $_GET["user_id"],
                         start: $(this)
@@ -102,15 +100,13 @@ $(function() {
                         }
                         $(".item")
                             .click(function() {
-                            window.location.href = "../userInfo/?user_id=" + $(this)
-                                .attr("user_id");
+                            location.href = "../userInfo/?user_id=" + $(this)
+                                .attr("user_id") + "#" + location.href;
                         });
                     });
                     break;
             }
         });
-        $(".htmlLoading")
-            .slideUp("slow");
         $(".content")
             .show("slow");
         $(".bf")

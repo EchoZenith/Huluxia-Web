@@ -20,7 +20,7 @@ $(function() {
                     $("#avatar")
                         .attr("src", avatar)
                         .click(function() {
-                        window.location.href = "../userinfo/?origin=空间/&user_id=" + user_id;
+                        location.href = "../userinfo/index.html?user_id="+user_id+"#"+location.href;
                     });
                     $("#signature")
                         .show()
@@ -29,25 +29,25 @@ $(function() {
                         .text(followingCount)
                         .parent()
                         .click(function() {
-                        window.location.href = "../user_follow/?type=1&user_id=" + user_id;
+                        location.href = "../user_follow/index.html?type=1&user_id=" + user_id+"#"+location.href;
                     });
                     $("#follower")
                         .text(followerCount)
                         .parent()
                         .click(function() {
-                        window.location.href = "../user_follow/?type=2&user_id=" + user_id;
+                        location.href = "../user_follow/index.html?type=2&user_id=" + user_id+"#"+location.href;
                     });
                     $("#post")
                         .click(function() {
-                        window.location.href = "../user_post_list/?origin=空间/&user_id=" + user_id;
+                        location.href = "../user_post_list/index.html?user_id=" + user_id+"#"+location.href;
                     });
                     $("#favorite")
                         .click(function() {
-                        window.location.href = "../user_post_list/?type=favorite&origin=空间/&user_id=" + user_id;
+                        location.href = "../user_post_list/index.html?type=favorite&user_id=" + user_id+"#"+location.href;
                     });
                     $("#comment")
                         .click(function() {
-                        window.location.href = "../user_comment/?user_id=" + user_id + "&origin=userInfo/;;;user_id;;" + user_id;
+                        location.href = "../user_comment/index.html?user_id=" + user_id + "#"+location.href;
                     })
                     break;
                 case 0:
@@ -55,7 +55,7 @@ $(function() {
                         .text("登录");
                     $("#avatar,#follow,#post,#favorite")
                         .click(function() {
-                        window.location.href = "../login/?origin=空间/";
+                        location.href = "../login/index.html#"+location.href;
                     });
                     break;
             }
