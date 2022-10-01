@@ -199,30 +199,37 @@ $(function() {
                                 .append('<div>' + beenLocations[i] + '</div>');
                         }
                     }
-                    
-                    $("#post").click(function(){
-                        location.href = "../user_post_list/index.html?user_id="+$_GET["user_id"]+"#"+location.href;
-                    });//帖子按钮点击
-                    $("#following").click(function(){
-                        location.href = "../user_follow/index.html?type=1&user_id="+$_GET["user_id"]+"#"+location.href;
-                    });//关注按钮点击
-                    $("#follower").click(function(){
-                        location.href = "../user_follow/index.html?type=2&user_id="+$_GET["user_id"]+"#"+location.href;
-                    });//粉丝按钮点击
-                    $("#comment").click(function(){
-                        location.href = "../user_comment/index.html?user_id="+$_GET["user_id"]+"#"+location.href;
-                    });//回复按钮点击
-                    $("#favorite").click(function(){
-                        location.href = "../user_post_list/index.html?type=favorite&user_id="+$_GET["user_id"]+"#"+location.href;
-                    });//收藏按钮点击
-                    
+
+                    $("#post")
+                        .click(function() {
+                        location.href = "../user_post_list/index.html?user_id=" + $_GET["user_id"] + "#" + location.href;
+                    }); //帖子按钮点击
+                    $("#following")
+                        .click(function() {
+                        location.href = "../user_follow/index.html?type=1&user_id=" + $_GET["user_id"] + "#" + location.href;
+                    }); //关注按钮点击
+                    $("#follower")
+                        .click(function() {
+                        location.href = "../user_follow/index.html?type=2&user_id=" + $_GET["user_id"] + "#" + location.href;
+                    }); //粉丝按钮点击
+                    $("#comment")
+                        .click(function() {
+                        location.href = "../user_comment/index.html?user_id=" + $_GET["user_id"] + "#" + location.href;
+                    }); //回复按钮点击
+                    $("#favorite")
+                        .click(function() {
+                        location.href = "../user_post_list/index.html?type=favorite&user_id=" + $_GET["user_id"] + "#" + location.href;
+                    }); //收藏按钮点击
+
                     $(".content")
                         .show("slow");
-                    $("#integral").click(function(){
-                        location.href="../cgourd/index.html?user_id="+$_GET["user_id"]+"&type=c&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&integral="+integral+"#"+location.href;
+                    $("#integral")
+                        .click(function() {
+                        location.href = "../cgourd/index.html?user_id=" + $_GET["user_id"] + "&type=c&nick=" + nick + "&age=" + age + "&gender=" + gender + "&avatar=" + avatar + "&integral=" + integral + "#" + location.href;
                     });
-                    $("#credits").click(function(){
-                        location.href="../cgourd/index.html?type=g&nick="+nick+"&age="+age+"&gender="+gender+"&avatar="+avatar+"&credits="+credits+"#"+location.href;
+                    $("#credits")
+                        .click(function() {
+                        location.href = "../cgourd/index.html?type=g&nick=" + nick + "&age=" + age + "&gender=" + gender + "&avatar=" + avatar + "&credits=" + credits + "#" + location.href;
                     });
                     if ($.cookie("Huluxia-Web-userID") != $_GET["user_id"]) {
                         $(".ftools")
@@ -266,42 +273,57 @@ $(function() {
                                 switch ($(this)
                                     .attr("ship")) {
                                     case "0":
-                                        $.getJSON("http://floor.huluxia.com/friendship/follow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
+                                        $.getJSON("http://floor.huluxia.com/friendship/follow/ANDROID/2.0?jsoncallback=?", {
+                                            _key: _key,
+                                            user_id: $_GET["user_id"]
+                                        });
                                         $(".follow")
-                                        .text("互相关注")
-                                        .attr("ship", "2")
-                                        .css("color", "rgb(25,212,105)");
-                                        Toast("关注成功",500);
+                                            .text("互相关注")
+                                            .attr("ship", "2")
+                                            .css("color", "rgb(25,212,105)");
+                                        Toast("关注成功", 500);
                                         break;
                                     case "1":
-                                        $.getJSON("http://floor.huluxia.com/friendship/unfollow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
+                                        $.getJSON("http://floor.huluxia.com/friendship/unfollow/ANDROID/2.0?jsoncallback=?", {
+                                            _key: _key,
+                                            user_id: $_GET["user_id"]
+                                        });
                                         $(".follow")
-                                        .text("关注")
-                                        .attr("ship", "3")
-                                        .css("color", "rgb(249,183,0)");
-                                        Toast("取消关注成功",500);
+                                            .text("关注")
+                                            .attr("ship", "3")
+                                            .css("color", "rgb(249,183,0)");
+                                        Toast("取消关注成功", 500);
                                         break;
                                     case "2":
-                                        $.getJSON("http://floor.huluxia.com/friendship/unfollow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
+                                        $.getJSON("http://floor.huluxia.com/friendship/unfollow/ANDROID/2.0?jsoncallback=?", {
+                                            _key: _key,
+                                            user_id: $_GET["user_id"]
+                                        });
                                         $(".follow")
-                                        .text("关注")
-                                        .attr("ship", "0")
-                                        .css("color", "rgb(249,183,0)");
-                                        Toast("取消关注成功",500);
+                                            .text("关注")
+                                            .attr("ship", "0")
+                                            .css("color", "rgb(249,183,0)");
+                                        Toast("取消关注成功", 500);
                                         break;
                                     case "3":
-                                    $.getJSON("http://floor.huluxia.com/friendship/follow/ANDROID/2.0?jsoncallback=?",{_key:_key,user_id:$_GET["user_id"]});
-                                    $(".follow")
-                                        .text("已关注")
-                                        .attr("ship", "1")
-                                        .css("color", "rgb(172,172,172)");
-                                        Toast("关注成功",500);
+                                        $.getJSON("http://floor.huluxia.com/friendship/follow/ANDROID/2.0?jsoncallback=?", {
+                                            _key: _key,
+                                            user_id: $_GET["user_id"]
+                                        });
+                                        $(".follow")
+                                            .text("已关注")
+                                            .attr("ship", "1")
+                                            .css("color", "rgb(172,172,172)");
+                                        Toast("关注成功", 500);
                                         break;
                                 }
                             });
-                            $(".complaint").click(function(){
-                                $.getJSON("http://floor.huluxia.com/complaint/ANDROID/4.0?jsoncallback=?",{_key,_key,file_id:$_GET["user_id"]},function() {
-                                    Toast("举报成功",500);
+                            $(".complaint")
+                                .click(function() {
+                                $.getJSON("http://floor.huluxia.com/complaint/ANDROID/4.0?jsoncallback=?", {
+                                    _key, _key, file_id: $_GET["user_id"]
+                                }, function() {
+                                    Toast("举报成功", 500);
                                 });
                             });
                         });

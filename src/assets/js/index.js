@@ -23,26 +23,6 @@ function timestampToTime(timestamp) {
     return Y + M + D + h + m + s;
 }
 
-function getOrigin() {
-    if ($_GET["origin"] != null && $_GET["origin"] != "") {
-        let originlink = $_GET["origin"].replace(/;;;/g, '?')
-            .replace(/;;/g, '=')
-            .replace(/;/g, '&');
-        return originlink;
-    } else {
-        return '';
-    }
-}
-var getAllPar = (function() {
-    let u = window.location.href;
-    let p = u.split('?')[1];
-    if (p != null) {
-        return p;
-    } else {
-        return "";
-    }
-})();
-
 function rgba2hex(rgba) {
     var hex = rgba.toString(16);
     var color = '#' + hex.slice(hex.length - 6);

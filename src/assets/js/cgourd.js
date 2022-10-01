@@ -20,13 +20,15 @@ $(function() {
             .show();
         $("#rightInfo")
             .text($_GET["integral"] + "贡献值");
-        $(".backTitle").text("贡献值");
+        $(".backTitle")
+            .text("贡献值");
     } else if ($_GET["type"] == "g") {
         $("#gourd")
             .show();
         $("#rightInfo")
             .text($_GET["credits"] + "葫芦数");
-        $(".backTitle").text("葫芦数");
+        $(".backTitle")
+            .text("葫芦数");
     } else {
         lgourl();
     }
